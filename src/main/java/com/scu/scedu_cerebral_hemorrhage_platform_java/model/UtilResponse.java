@@ -1,4 +1,4 @@
-package com.scu.scedu_cerebral_hemorrhage_platform_java.controller.model;
+package com.scu.scedu_cerebral_hemorrhage_platform_java.model;
 
 import lombok.Data;
 

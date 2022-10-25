@@ -1,1 +1,9 @@
+server:
+  port: 8090
+spring:
+  thymeleaf:
+    cache: false
+    suffix: .html
 
+  mvc:
+    static-path-pattern: /static/**

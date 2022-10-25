@@ -1,4 +1,4 @@
-package com.scu.scedu_cerebral_hemorrhage_platform_java.controller.model;
+package com.scu.scedu_cerebral_hemorrhage_platform_java.model;
 
 import lombok.Data;
 
@@ -11,5 +11,5 @@ public class UtilRequest {
     //脑区
     String bundles;
     //所选轨迹
-    List<String> trails;
+    List<String> trail;
 }
