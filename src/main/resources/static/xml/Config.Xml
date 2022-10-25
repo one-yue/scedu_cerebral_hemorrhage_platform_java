@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <WADO>
+  <!--ip地址整个系统均是读取该处ip-->
+    <IP>120.78.69.27:80</IP>
+  </WADO>
+</root>

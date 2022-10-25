@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>2019nCoVAS</title>
+    <meta name="keywords" content="2019-NcoV,transmission,genome,psychological stress,LAUP,k-mer,bioinformatics">
+    <meta name="description"
+          content="Web service for 2019-NcoV transmission, genome, and psychological stress analysis">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+    <link rel="shortcut icon" href="/static/img/coronavirus_logo.png">
+    <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/dataTables.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/buttons.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/select.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/semantic.min.css">
+    <link rel="stylesheet" href="/static/css/my.css">
+
+    <script src="/static/js/semantic.min.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        function write1() {
+
+            htmlobj = $.ajax({url: "/static/head.html", async: false});
+            var head = htmlobj.responseText;
+            document.write(head);
+
+
+        }
+
+        write1();
+    </script>
+
+
+    <!---<script src="js/head_2.js"></script>-->
+
+
+    <style>
+        a.J_menuItem {
+            border-left: 2px solid rgba(34, 36, 38, .1);
+            /* border-right: 2px solid rgba(34,36,38,.1); */
+        }
+
+        a.dropdown-toggle {
+            border-left: 2px solid rgba(34, 36, 38, .1);
+            /* border-right: 2px solid rgba(34,36,38,.1); */
+        }
+
+        .navbar-header {
+            width: auto;
+        }
+
+        #page-wrapper .gray-bg {
+            margin-left: 10em;
+            margin-right: 10em;
+        }
+
+        #wrapper {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: #ffffff;
+        }
+
+        #d {
+            width: 80%;
+            boder: 1px solid #000;
+            height: 800px;
+            margin: auto;
+            padding: 0px;
+        }
+
+        #d1 {
+            width: 80%;
+            height: 100px;
+            boder: 1px solid #000;
+            margin-top: 0;
+            margin-right: auto;
+            margin-bottom: 200;
+            margin-left: auto;
+            padding-bottom: 200px;
+        }
+
+        #d2 {
+            width: 30%;
+            height: 100px;
+            float: left;
+            boder: 1px solid #000;
+            margin-light: 10px;
+            margin-left: 10px
+        }
+
+        #d3 {
+            width: 30%;
+            height: 100px;
+            boder: 1px solid #000;
+            float: right;
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+
+
+<body class="gray-bg">
+
+<script type="text/javascript">
+
+    function getTime() {
+
+        var dateObj = new Date();
+
+        var year = dateObj.getFullYear();
+
+        var month = dateObj.getMonth() + 1;
+
+        var date = dateObj.getDate();
+
+        if (month < 10) {
+            month = "0" + month;
+        }
+
+        if (date < 10) {
+            date = "0" + date;
+        }
+
+        var newDate = year + '-' + month + '-' + date;
+        return newDate;
+        document.getElementById("date1").innerHTML = newDate;//在div中写入时间
+    }
+
+</script>
+
+<div class="wrapper wrapper-content">
+    <div>
+        <ul class="breadcrumb" style="margin:0px 300px -10px 300px;font:bold 15px Georgia, serif">
+            <li><a href="home.html"><i class="icon home"></i>Home</a></li>
+            <i class="right chevron icon divider"></i>
+            <li class="active"><a href="epidemic_prediction.html">Infectious disease model</a></li>
+            <i class="right chevron icon divider"></i>
+            <li class="active">Epidemic prediction</li>
+        </ul>
+    </div>
+
+    <div style="border-width:1px;margin: 5px 270px;padding:5px 15px;">
+
+        <div
+                style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+            <div style="margin: 10px 5px 15px">
+                <form>
+                    <label for="formGroupInputLarge">Data segment selection:</label>
+                    <div class="row form-inline row">
+
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                                <label for="formGroupInputLarge">Start date:</label>
+                                <!--指定 date标记-->
+                                <div class='input-group date col-xs-6' id='date_start'>
+                                    <input type='text' class="form-control" readonly="readonly"/>
+                                    <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                                <label for="formGroupInputLarge">End date:</label>
+                                <!--指定 date标记-->
+                                <div class='input-group date col-xs-6' id='date_end'>
+                                    <input type='text' class="form-control" readonly="readonly"/>
+                                    <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                                <label for="formGroupInputLarge">Infectious disease model:</label>
+                                <select name="model">
+                                    <option value="a"
+                                    <c:if test="${model=='SIR'}"></c:if>
+                                    SIR</option>
+                                    <option value="b"
+                                    <c:if test="${model=='SEIR'}"></c:if>
+                                    SEIR</option>
+                                    <option value="c"
+                                    <c:if test="${model=='SEIRQ'}"></c:if>
+                                    SEIRQ</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--
+                                                <div class='col-sm-6'>
+                                                    <div class="form-group">
+                                                        <label for="formGroupInputLarge">Forecast duration:</label>
+                                                        <div class='input-group date col-xs-6' id='time'>
+                                                            <input type='text' class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                    -->
+                </form>
+            </div>
+            <button type="button" class="btn btn-primary" onClick=""
+                    style="float:bottom;margin:10px 20px">Submit
+            </button>
+            <button type="button" class="btn btn-primary" onClick=""
+                    style="float:bottom;margin:10px 20px">Reset
+            </button>
+            <i class="glyphicon glyphicon-question-sign" style="font-size:15px;float:bottom;margin:20px 20px">
+                Help</i>
+        </div>
+
+        <div style="margin:10px 30px">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <p> Infection rate:3.450640（β) </p>
+                    <p> The incidence rate of the exposed(E):0.069183(α) </p>
+                    <p> Cure rate:0.012597(γ)</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="res" style="height:300%;margin:0 auto;width:100%"></div>
+
+        <div style="margin:10px 30px">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <p>The epidemic data of infectious disease model is connected to Akshare whhich provides the latest
+                        epidemic data from January 20 to May 1 through API interface, including the number of confirmed
+                        cases, suspected cases, deaths, etc. We process the data through python scripts to adapt to the
+                        prediction model. For 14840 newly confirmed cases in Hubei Province on February 12, we
+                        apportioned the number of newly increased cases in proportion to the number of newly confirmed
+                        cases from February 7 to February 12 in the calculation process.</p>
+                    <p>Generally, people within the epidemic scope of infectious diseases are divided into the following
+                        categories:</p>
+                    <p>1. S, susceptible, refers to those who do not have the disease, but lack of immunity, and are
+                        easy to be infected after contact with the infected person;</p>
+                    <p>2. E, exposed, refers to people who have been exposed to infection but are unable to infect
+                        others temporarily, which is applicable to infectious diseases with long incubation period;</p>
+                    <p>3. I, infectious, refers to the infected person, who can be transmitted to class s members to
+                        become class E or class I members;</p>
+                    <p>4. R, recovered, refers to the person who is isolated or has immunity due to illness. If the
+                        immune period is limited, class R members can be changed into class s again.</p>
+                    <p>The differential equation of SIR model is as follows:</p>
+                    <img src="/static/img/sir.png" width="100" height="100" align="center">
+                    <p>The differential equation of SEIR model is as follows:</p>
+                    <img src="/static/img/seir.png" width="100" height="100" align="center">
+                    <p>The differential equations of seirq model we designed are as follows:</p>
+                    <img src="/static/img/seirq.png" width="300" height="300" align="center">
+                    <p>The parameters in the infectious disease model are explained as follows:</p>
+                    <img src="/static/img/para_explain.png" width="300" height="300" align="center">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+
+
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+
+<script type="text/javascript">
+
+    var dom = document.getElementById("res");
+    var myChart = echarts.init(dom);
+    var app = {};
+
+
+    option = null;
+
+    option = {
+
+        title: {
+            text: 'Epidemic transmission prediction',
+            subtext: '2019nCoVAS'
+        },
+
+        legend: {
+            top: 32,
+            left: 'center',
+            data: ['Real confirmed cases', 'Predicted result'],
+            textStyle: { //图例文字的样式
+                fontSize: 16
+            },
+        },
+        tooltip: {
+            trigger: 'item',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            },
+
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['2020-01-20', '2020-01-21', '2020-01-22', '2020-01-23', '2020-01-24', '2020-01-25', '2020-01-26', '2020-01-27', '2020-01-28', '2020-01-29', '2020-01-30', '2020-01-31', '2020-02-01', '2020-02-02', '2020-02-03', '2020-02-04', '2020-02-05', '2020-02-06', '2020-02-07', '2020-02-08', '2020-02-09', '2020-02-10', '2020-02-11', '2020-02-12', '2020-02-13', '2020-02-14', '2020-02-15', '2020-02-16', '2020-02-17', '2020-02-18', '2020-02-19', '2020-02-20', '2020-02-21', '2020-02-22', '2020-02-23', '2020-02-24', '2020-02-25', '2020-02-26', '2020-02-27', '2020-02-28', '2020-02-29', '2020-03-01', '2020-03-02', '2020-03-03', '2020-03-04', '2020-03-05', '2020-03-06', '2020-03-07', '2020-03-08', '2020-03-09', '2020-03-10', '2020-03-11', '2020-03-12', '2020-03-13', '2020-03-14', '2020-03-15', '2020-03-16', '2020-03-17', '2020-03-18', '2020-03-19', '2020-03-20', '2020-03-21', '2020-03-22', '2020-03-23', '2020-03-24', '2020-03-25', '2020-03-26', '2020-03-27', '2020-03-28', '2020-03-29', '2020-03-30', '2020-03-31', '2020-04-01', '2020-04-02', '2020-04-03', '2020-04-04', '2020-04-05', '2020-04-06', '2020-04-07', '2020-04-08', '2020-04-09', '2020-04-10', '2020-04-11', '2020-04-12', '2020-04-13', '2020-04-14', '2020-04-15', '2020-04-16', '2020-04-17', '2020-04-18', '2020-04-19', '2020-04-20', '2020-4-21', '2020-4-22', '2020-4-23', '2020-4-24', '2020-4-25', '2020-4-26', '2020-4-27', '2020-4-28', '2020-4-29', '2020-4-30', '2020-5-1'],
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    fontSize: 15      //更改坐标轴文字大小
+                }
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    fontSize: 14      //更改坐标轴文字大小
+                }
+            }
+        },
+
+        series: [
+            {
+                name: 'Real confirmed cases',
+                type: 'line',
+                data: [260, 406, 526, 771, 1208, 1870, 2613, 4349, 5739, 7417, 9308, 11289, 13748, 16369, 19381, 22942, 26302, 28985, 31774, 33738, 35982, 37626, 38800, 51860, 55748, 56873, 57416, 57934, 58016, 57805, 56727, 55389, 53284, 51411, 49824, 47672, 45604, 43258, 39919, 37414, 35329, 32652, 30004, 27433, 25352, 23784, 22177, 20533, 19016, 17721, 16145, 14831, 13526, 12094, 10734, 9898, 8976, 8056, 7263, 6569, 6013, 5549, 5120, 4735, 4287, 3947, 3460, 3128, 2691, 2396, 2161, 2004, 1863, 1727, 1562, 1375, 1299, 1242, 1190, 1160, 1116, 1089, 1138, 1156, 1170, 1137, 1107, 1081, 1058, 1041, 1031, 1003, 1005, 959, 915, 838, 801, 723, 648, 647, 619, 599, 557, 531, 481, 395, 339, 295, 260, 208]
+            },
+            {
+                name: 'Predicted result',
+                type: 'line',
+                data: [224, 410, 550, 792, 1308, 1895, 3015, 4565, 6164, 7366, 8633, 10373, 12316, 14275, 16149, 17891, 19491, 20952, 22281, 23488, 24580, 25566, 26452, 27248, 27957, 28588, 29146, 29635, 30061, 30428, 30741, 31004, 31220, 31393, 31526, 31623, 31685, 31716, 31718, 31693, 31644, 31572, 31479, 31367, 31238, 31093, 30933, 30760, 30575, 30378, 30172, 29957, 29733, 29502, 29265, 29022, 28773, 28520, 28263, 28003, 27739, 27473, 27205, 26935, 26664, 26392, 26119, 25846, 25572, 25299, 25026, 24753, 24481, 24210, 23940, 23671, 23404, 23138, 22873, 22610, 22349, 22090, 21832, 21577, 21323, 21072, 20822, 20575, 20330, 20087, 19847, 19608, 19372, 19139, 18908, 18679, 18452, 18228, 18006, 17786, 17569, 17354, 17142, 16932, 16724, 16518, 16315, 16114, 15916, 15719, 15525, 15334, 15144, 14957, 14772, 14589, 14408, 14229, 14052, 13878, 13706, 13535, 13367, 13201, 13037, 12874, 12714, 12556, 12400, 12245, 12092, 11942, 11793, 11646, 11500, 11357, 11215, 11075, 10937, 10800, 10666, 10532, 10401, 10271, 10143, 10016, 9891, 9767, 9645, 9524, 9405, 9288, 9172, 9057, 8944, 8832, 8722, 8612, 8505, 8398, 8293, 8190, 8087, 7986, 7886, 7787, 7690, 7594, 7499, 7405, 7312, 7221, 7130, 7041, 6953, 6866, 6780, 6695, 6611, 6529, 6447, 6366, 6287, 6208, 6130, 6053, 5978, 5903, 5829, 5756, 5684, 5613, 5543, 5473, 5405, 5337, 5270, 5204, 5139, 5075, 5011, 4949, 4887, 4825, 4765, 4705, 4646, 4588, 4531, 4474, 4418, 4363, 4308, 4254, 4201, 4148, 4096, 4045, 3995, 3945, 3895, 3846, 3798, 3751, 3704, 3657, 3612, 3566, 3522, 3478, 3434, 3391, 3349, 3307, 3265, 3224, 3184, 3144, 3105, 3066, 3028, 2990, 2952, 2915, 2879
+                ]
+            },
+        ]
+
+    };
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+
+</script>
+
+
+<script language="javascript" type="text/javascript">
+
+    function write2() {
+
+        htmlobj = $.ajax({url: "/static/tail.html", async: false});
+        var tail = htmlobj.responseText;
+
+        document.write(tail);
+    }
+
+    write2();
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        var startDate = new Date('2020-01-20');
+        var endDate = new Date();
+        $('#date_start').datetimepicker({
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            language: 'cn',
+            minView: 'month',
+            autoclose: true,
+            todayBtn: true,
+            startDate: startDate,
+            endDate: endDate,
+            language: "en",
+        }).on("changeDate", function (ev) {
+            if (ev.date) {
+                $('#date_end').datetimepicker('setStartDate', new Date(ev.date.valueOf()))
+            } else {
+                $('#date_end').datetimepicker('setStartDate');
+            }
+        });
+
+        $('#date_end').datetimepicker({
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            language: 'cn',
+            minView: 'month',
+            autoclose: true,
+            startDate: startDate,
+            endDate: endDate,
+            language: "en",
+        }).on("changeDate", function (ev) {
+            if (ev.date) {
+                $('#date_start').datetimepicker('setEndDate', new Date(ev.date.valueOf()))
+            } else {
+                $('#date_start').datetimepicker('setEndDate', new Date());
+            }
+        });
+    });
+
+</script>
+<script>
+    var param = "";
+
+    function showreload() {
+
+        //xman:全部大写
+        param = ($("#model").val() + "_" + $("#data_start").val() + "_14.txt").toUpperCase();
+
+        getdata_model({
+            model_param: param,
+            model_path: "http://120.78.69.27:8080/model_data",
+            callback: function (data) {
+
+                data_raw = data.msg;
+
+                if (data1 != null) {
+                    changeDataToEchartdata(data_raw);
+                }
+            }
+        });
+
+        function changeDataToEchartdata(data1) {
+            //xman:数据转换成echarts使用的格式
+            var result_arr = data1.split('\n');
+            var len = result_arr.length;
+            var model_para_1 = "";
+            var model_para_2 = "";
+            var model_para_3 = "";
+            var date_str = "";
+            var confirm_str = "";
+            var result_str = "";
+            if (len == 9) {
+                model_para_1 = result_arr[0];
+                model_para_2 = result_arr[1];
+                model_para_3 = result_arr[2];
+                date_str = result_arr[4];
+                confirm_str = result_arr[6];
+                result_str = result_arr[8];
+            } else {
+                model_para_1 = result_arr[0];
+                model_para_2 = result_arr[1];
+                model_para_3 = null;
+                date_str = result_arr[3];
+                confirm_str = result_arr[5];
+                result_str = result_arr[7];
+            }
+            //xman:result_arr应该有三项
+
+
+            ShowModel(model_para_1,
+                model_para_2,
+                model_para_3,
+                goarrToGoresource(date_str),
+                goarrToGoresource(confrim_str),
+                goarrToGoresource(result_str));
+        }
+
+
+        //字符串转换成数组对象
+        function goarrToGoresource(data) {
+            data = data.replace("[", "");
+            data = data.replace("]", "")
+            var arr = data.split(',');
+            return arr;
+        }
+
+
+        function ShowModel(model_para_1, model_para_2, model_para_3,
+                           date_arr, confrim_arr, result_arr) {
+            /*
+                    //XMAN:标题后加上分类名称
+                    var categoryname = "";
+        //			var indexname = index.toString();
+            //		if(index == 1)
+                //	{
+                    //	indexname = "";
+                    //}
+                    var cpgname = $("#CpG"+indexname).val();
+                    if(cpgname.toUpperCase()!= "ALL")
+                    {
+                        categoryname += cpgname;
+                    }
+                    var densityname = $("#Density"+indexname).val();
+                    if(densityname != null && densityname.toUpperCase()!= "ALL")
+                    {
+                        categoryname += "/"+densityname;
+                    }
+                    var tataname = $("#TATA"+indexname).val();
+                    if(tataname.toUpperCase() != "ALL")
+                    {
+                        categoryname += "/"+tataname;
+                    }
+                    var breadthname = $("#breadth"+indexname).val();
+                    if(breadthname.toUpperCase() != "ALL")
+                    {
+                        categoryname += "/"+breadthname;
+                    }
+                    if(index == 1)
+                    {
+                        document.getElementById("chart_title"+index).innerHTML = "GO enrichment results of genes under category 1 ("+ categoryname +"):";
+                    }
+
+                    var resultdiv = document.getElementById("resultdiv"+index);
+                    resultdiv.style.display="";
+                    var resultdiv1_download = document.getElementById("resultdiv1_download");
+                    resultdiv1_download.style.display="";
+                    $(".nodata").remove();
+
+                    var dom = document.getElementById("res");
+                    var go_chart_1 = echarts.init(dom);*/
+
+            var dom = document.getElementById("res");
+            var myChart = echarts.init(dom);
+            var option = null;
+
+            option = {
+
+                title: {
+                    text: 'Epidemic transmission prediction',
+                    subtext: '2019nCoVAS'
+                },
+
+                legend: {
+                    top: 32,
+                    left: 'center',
+                    data: ['Real confirmed cases', 'Predicted result'],
+                    textStyle: { //图例文字的样式
+                        fontSize: 16
+                    },
+                },
+                tooltip: {
+                    trigger: 'item',
+                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    },
+
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['2020-01-20', '2020-01-21', '2020-01-22', '2020-01-23', '2020-01-24', '2020-01-25', '2020-01-26', '2020-01-27', '2020-01-28', '2020-01-29', '2020-01-30', '2020-01-31', '2020-02-01', '2020-02-02', '2020-02-03', '2020-02-04', '2020-02-05', '2020-02-06', '2020-02-07', '2020-02-08', '2020-02-09', '2020-02-10', '2020-02-11', '2020-02-12', '2020-02-13', '2020-02-14', '2020-02-15', '2020-02-16', '2020-02-17', '2020-02-18', '2020-02-19', '2020-02-20', '2020-02-21', '2020-02-22', '2020-02-23', '2020-02-24', '2020-02-25', '2020-02-26', '2020-02-27', '2020-02-28', '2020-02-29', '2020-03-01', '2020-03-02', '2020-03-03', '2020-03-04', '2020-03-05', '2020-03-06', '2020-03-07', '2020-03-08', '2020-03-09', '2020-03-10', '2020-03-11', '2020-03-12', '2020-03-13', '2020-03-14', '2020-03-15', '2020-03-16', '2020-03-17', '2020-03-18', '2020-03-19', '2020-03-20', '2020-03-21', '2020-03-22', '2020-03-23', '2020-03-24', '2020-03-25', '2020-03-26', '2020-03-27', '2020-03-28', '2020-03-29', '2020-03-30', '2020-03-31', '2020-04-01', '2020-04-02', '2020-04-03', '2020-04-04', '2020-04-05', '2020-04-06', '2020-04-07', '2020-04-08', '2020-04-09', '2020-04-10', '2020-04-11', '2020-04-12', '2020-04-13', '2020-04-14', '2020-04-15', '2020-04-16', '2020-04-17', '2020-04-18', '2020-04-19', '2020-04-20', '2020-4-21', '2020-4-22', '2020-4-23', '2020-4-24', '2020-4-25', '2020-4-26', '2020-4-27', '2020-4-28', '2020-4-29', '2020-4-30', '2020-5-1'],
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 15      //更改坐标轴文字大小
+                        }
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value}'
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 14      //更改坐标轴文字大小
+                        }
+                    }
+                },
+
+                series: [
+                    {
+                        name: 'Real confirmed cases',
+                        type: 'line',
+                        data: [260, 406, 526, 771, 1208, 1870, 2613, 4349, 5739, 7417, 9308, 11289, 13748, 16369, 19381, 22942, 26302, 28985, 31774, 33738, 35982, 37626, 38800, 51860, 55748, 56873, 57416, 57934, 58016, 57805, 56727, 55389, 53284, 51411, 49824, 47672, 45604, 43258, 39919, 37414, 35329, 32652, 30004, 27433, 25352, 23784, 22177, 20533, 19016, 17721, 16145, 14831, 13526, 12094, 10734, 9898, 8976, 8056, 7263, 6569, 6013, 5549, 5120, 4735, 4287, 3947, 3460, 3128, 2691, 2396, 2161, 2004, 1863, 1727, 1562, 1375, 1299, 1242, 1190, 1160, 1116, 1089, 1138, 1156, 1170, 1137, 1107, 1081, 1058, 1041, 1031, 1003, 1005, 959, 915, 838, 801, 723, 648, 647, 619, 599, 557, 531, 481, 395, 339, 295, 260, 208]
+                    },
+                    {
+                        name: 'Predicted result',
+                        type: 'line',
+                        data: result_arr
+                    },
+                ]
+
+            };
+            // 为echarts对象加载数据
+            mycharts.setOption(option);
+            //hideLoading(go_chart_1);
+
+        }
+    }
+
+
+</script>
+
+<!--<script src="js/tail_2.js"></script>-->
+
+</body>
+
+</html>

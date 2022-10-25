@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>2019nCoVAS</title>
+    <meta name="keywords" content="LAUP,CpG isl,k-mer,bioinformatics">
+    <meta name="description" content="WA web server for CpG Island study:CpG Island related density and LAUPs (Lineage-associated Underrepresented Permutations) analysis">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/static/img/logo.png"> <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
+
+    <style>
+        a.J_menuItem {
+            border-left: 2px solid rgba(34,36,38,.1);
+            /* border-right: 2px solid rgba(34,36,38,.1); */
+        }
+        a.dropdown-toggle {
+            border-left: 2px solid rgba(34,36,38,.1);
+            /* border-right: 2px solid rgba(34,36,38,.1); */
+        }
+        .navbar-header {
+            width: auto;
+
+        }
+        #page-wrapper .gray-bg {
+            margin-left: 10em;
+            margin-right: 10em;
+        }
+        #wrapper {
+            width: 100%;
+              overflow-x: hidden;
+            background-color: #ffffff;
+        }
+		#d
+		{
+	width: 80%;
+	boder: 1px solid #000;
+	height: 800px;
+	margin: auto;
+	padding: 0px;
+		}
+		#d1{
+	width: 80%;
+	height: 100px;
+	boder: 1px solid #000;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 200;
+	margin-left: auto;
+	padding-bottom: 200px;
+		}
+
+		#d2
+		{
+			width:30%;
+			height:100px;
+			float:left;
+			boder:1px solid #000;
+			margin-light:10px;
+			margin-left:10px
+		}
+		#d3
+		{
+			width:30%;
+			height:100px;
+			boder:1px solid #000;
+			float:right;
+			margin-right:10px;
+		}
+    </style>
+	
+</head>
+<body class="gray-bg top-navigation">
+    <div id="wrapper" >
+        <div class="row border-bottom white-bg">
+            <nav class="navbar navbar-static-top" role="navigation" style="left:17%">
+                    <div class="navbar-header">
+                        <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                            <i class="fa fa-reorder"></i>
+                        </button>
+                        <a href="#" class="navbar-brand">2019nCoVAS</a>
+                    </div>
+                    <div class="navbar-collapse collapse" id="navbar">
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a aria-expanded="false" role="button" href="/home" > Home</a>
+                            </li>
+                            <li class="active">
+                                <a aria-expanded="false" role="button" href="/cell_subtype_analysis" > Cell subtype analysis</a>
+                            </li>
+                            <!--
+                            <li class="dropdown">
+                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Infectious disease model <span class="caret"></span></a>
+                                <ul role="menu" class="dropdown-menu">
+                                    <li><a href="epidemic_prediction.html">Epidemic transmission prediction</a>
+                                    </li>
+                                    <li><a href="R0_estimation.html">R0 trend analysis</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Genome sequence analysis <span class="caret"></span></a>
+                                <ul role="menu" class="dropdown-menu">
+                                    <li><a href="genomic_variation.html">Genome variation analysis</a>
+                                    </li>
+                                    <li><a href="genomic_kmer.html">Genome k-mer analysis</a>
+                                    </li>
+									<li><a href="genomic_laups.html">Genome LAUPs analysis</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Psychological stress assessment<span class="caret"></span></a>
+                                <ul role="menu" class="dropdown-menu">
+                                    <li><a href="psychology.html">Public psychological stress assessment</a>
+                                    </li>
+                                    <li><a href="emotional_words.html">Analysis of emotional words</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> Related Links <span class="caret"></span></a>
+                                <ul role="menu" class="dropdown-menu">
+                                    <li><a href="http://www.combio-lezhang.online/cgidla/index.html"> CGIDLA </a>
+                                    </li>
+                                    <li><a href="http://meme-suite.org/"> MEME </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            -->
+
+                        </ul>
+                        <!--
+                        <ul class="nav navbar-top-links navbar-right">
+                            <li>
+                                <a href="login.html">
+                                    <i class="fa fa-sign-out"></i> 退出
+                                </a>
+                            </li>
+                        </ul>
+                    	-->
+                    </div>
+                    </nav>
+                    <div style="background:url('/static/img/bg.jpg') no-repeat;background-size:100% 100%;height:170px;">
+						<img src="/static/img/coronavirus_logo2.png"  class="ui image" style="padding-top: 20px; float:left; margin-left:18%">
+				        <strong>
+							<p style="font-size: 42px; y:100px; color: #111111; margin-left: 26%;padding-top: 30px;">
+							<font face="Verdana">2019 Novel Coronavirus Analysis Service</font>
+							</p>
+						</strong>
+						 <p style="font-size: 23px; color: #111111; margin-left: 26%">
+						 <font face="Verdana">&nbsp;Web service for 2019-NcoV transmission, genome, and psychological stress analysis</font>
+						 </p>
+					</div>  
+              
+        </div>
+    
+       	
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        
+
+            <!--<div class="row content-tabs">
+                <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+                </button>
+                <nav class="page-tabs J_menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                    </div>
+                </nav>
+                <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+                </button>
+                <div class="btn-group roll-nav roll-right">
+                    <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+
+                    </button>
+                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                        <li class="J_tabShowActive"><a>定位当前选项卡</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+                        </li>
+                        <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            </div>-->
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+
+
+  </div>
+
+
+           
+
+    <!-- 全局js -->
+    <script src="/static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/static/js/plugins/layer/layer.min.js"></script>
+
+    <!-- 自定义js -->
+    <script src="/static/js/hplus.js?v=4.1.0"></script>
+    <script type="text/javascript" src="/static/js/contabs.js"></script>
+
+    <!-- 第三方插件 -->
+    <script src="/static/js/plugins/pace/pace.min.js"></script>
+
+    <script>
+        $(".dropdown-menu").find("a").click(function(){
+            $(this).parents(".dropdown").find(".dropdown-toggle").click();
+        })
+    </script>
+ 
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>2019nCoVAS</title>
+    <meta name="keywords" content="2019-NcoV,transmission,genome,psychological stress,LAUP,k-mer,bioinformatics">
+    <meta name="description"
+        content="Web service for 2019-NcoV transmission, genome, and psychological stress analysis">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/static/img/coronavirus_logo.png">
+    <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/dataTables.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/buttons.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/select.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/semantic.min.css">
+    <link rel="stylesheet" href="/static/css/my.css">
+
+    <script src="/static/js/semantic.min.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        function write1() {
+
+            htmlobj = $.ajax({ url: "/static/head.html", async: false });
+            var head = htmlobj.responseText;
+            document.write(head);
+
+
+        }
+
+        write1();
+    </script>
+
+
+    <!---<script src="js/head_2.js"></script>-->
+
+
+    <style>
+        a.J_menuItem {
+            border-left: 2px solid rgba(34, 36, 38, .1);
+            /* border-right: 2px solid rgba(34,36,38,.1); */
+        }
+
+        a.dropdown-toggle {
+            border-left: 2px solid rgba(34, 36, 38, .1);
+            /* border-right: 2px solid rgba(34,36,38,.1); */
+        }
+
+        .navbar-header {
+            width: auto;
+        }
+
+        #page-wrapper .gray-bg {
+            margin-left: 10em;
+            margin-right: 10em;
+        }
+
+        #wrapper {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: #ffffff;
+        }
+
+        #d {
+            width: 80%;
+            boder: 1px solid #000;
+            height: 800px;
+            margin: auto;
+            padding: 0px;
+        }
+
+        #d1 {
+            width: 80%;
+            height: 100px;
+            boder: 1px solid #000;
+            margin-top: 0;
+            margin-right: auto;
+            margin-bottom: 200;
+            margin-left: auto;
+            padding-bottom: 200px;
+        }
+
+        #d2 {
+            width: 30%;
+            height: 100px;
+            float: left;
+            boder: 1px solid #000;
+            margin-light: 10px;
+            margin-left: 10px
+        }
+
+        #d3 {
+            width: 30%;
+            height: 100px;
+            boder: 1px solid #000;
+            float: right;
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+
+
+<body class="gray-bg">
+
+    <div class="wrapper wrapper-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10" style="left:-8%">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="width: 1340px; height: 160px;">
+                            <h2>Overview</h2>
+                            <p>Since COVID-19 epidemic is still expanding around the world and posing serious threat to
+                                human life and health, we develop such a 2019nCoVAS webservice that not only offers
+                                online epidemic transmission prediction and LAUPs (Lineage-associated Underrepresented
+                                Permutations) analysis service to investigate the spreading trend and genome sequence
+                                characteristics, but also provides psychological stress assessment based on the emotion
+                                dictionary we build for 2019-nCoV.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5" style="float:left;left:-8%">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="width: 650px;height: 330px;">
+                            <h2>Epidemic transmission prediction</h2>
+                            <p>To predict the epdemic transmission and basic reproduction number(R0) for 2019-nCoV, we
+                                offer three epidemic transmission predictive models: SIR, SEIR and SEIRQ. Especially,
+                                the SEIRQ model considers quarantined case factor, which can be used to predict epidemic
+                                situation under the condition of suspected cases quarantine.  <a href="epidemic_prediction.html" target="_blank"><u>View details</u></a><br>
+                                <a href="epidemic_prediction.html" target="_blank"><img src="/static/img/epi.png" style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
+
+                        </div>
+                        <div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5" style="float:right;right:8%">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="width: 655px;height: 330px;">
+                            <h2>Genome sequence analysis</h2>
+                            <p>In order to analyze the LAUPs sequence characteris-tics for 2019-nCoV genome, we use JBLA
+                                (Jellyfish-based LAUPs analysis application) to compute the underrepresented sequence
+                                and common LAUPs. We also introduced the MOTIF discovery method to find the most
+                                frequent arrangement pattern in the common LAUPs and provide data download service to
+                                help users for further sequence and phylogenetic analysis.  <a href="genomic_laups.html" target="_blank"><u>View details</u></a><br>
+                                <a href="genomic_kmer.html" target="_blank"><img src="/static/img/kmer.png" style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5" style="float:left;left:-8%">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="width: 650px;height: 330px;">
+                            <h2>Psychological stress assesment</h2>
+                            <p>We developed two corresponding features for our web server. One is to build an emotional
+                                dictionary for 2019-nCoV, which can highlight its high frequent vocabulary. The other is
+                                to assess and visualize the dynamic changes for the public's positive and negative
+                                emotions in response to 2019-nCoV at different time point. These features not only are
+                                able to provide the retrospective assessment function for psychologists, but also can be
+                                used as the references for national policies development.  <a href="psychology.html" target="_blank"><u>View details</u></a><br>
+                                <a href="emotional_words.html" target="_blank"><img src="/static/img/emotional words.png" style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-5" style="float:right;right:8%">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title" style="width: 650px;height: 330px;">
+						<br><br>
+						<h3>Funding Support</h3>
+						<p>This work was supported by National Science and Tech-nology Major Project [2018ZX10201002] and Sichuan University Postdoctoral Research and Development Foundation [2020SCU12056].</p>
+                        <br>
+						<h3>Contact Us</h3>
+						<p>Address: College of Computer Science, Sichuan University. No. 24 South Section 1, Yihuan Road, Chengdu Sichuan, China, 610065. <br>E-mail: xiaoming@scu.edu.cn    zhangle06@scu.edu.cn</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+       
+
+    <script language="javascript" type="text/javascript">
+
+        function write2() {
+
+            htmlobj = $.ajax({ url: "/static/tail.html", async: false });
+            var tail = htmlobj.responseText;
+
+            document.write(tail);
+        }
+
+        write2();
+    </script>
+
+    <!--<script src="js/tail_2.js"></script>-->
+
+</body>
+
+</html>

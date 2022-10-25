@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+
+    <LUAP value="Bacteria">
+		<Species>Bacteria</Species>
+		<one>5354235487</one>
+		<two>13</two>
+		<three>30</three>
+		<four>Yes(1.1210e-04)</four>
+		<five>No(1)</five>
+	</LUAP>
+    <LUAP value="Oryza sativa">
+		<Species>Oryza sativa</Species>
+		<one>382778125</one>
+		<two>12</two>
+		<three>13543</three>
+		<four>Yes(0)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Arabidopsis thaliana">
+		<Species>Arabidopsis thaliana</Species>
+		<one>119667750</one>
+		<two>10</two>
+		<three>86</three>
+		<four>Yes(2.9457e-31)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Homo sapiens">
+		<Species>Homo sapiens</Species>
+		<one>3241953429</one>
+		<two>11</two>
+		<three>100</three>
+		<four>Yes(2.324e-37)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Ornithorhynchus anatinus">
+		<Species>Ornithorhynchus anatinus</Species>
+		<one>1995607322</one>
+		<two>12</two>
+		<three>1896</three>
+		<four>Yes(0)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Pan troglodytes">
+		<Species>Pan troglodytes</Species>
+		<one>3231170666</one>
+		<two>11</two>
+		<three>16</three>
+		<four>Yes(5.9818e-07)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Macaca mulatta">
+		<Species>Macaca mulatta</Species>
+		<one>3236224332</one>
+		<two>11</two>
+		<three>58</three>
+		<four>Yes(1.4924e-22)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Papio anubis">
+		<Species>Papio anubis</Species>
+		<one>2948397226</one>
+		<two>11</two>
+		<three>80</three>
+		<four>Yes(1.4688e-29)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Colobus angolensis">
+		<Species>Colobus angolensis</Species>
+		<one>2970124662</one>
+		<two>11</two>
+		<three>138</three>
+		<four>Yes(1.1284e-49)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Owl monkey">
+		<Species>Owl monkey</Species>
+		<one>2926581689</one>
+		<two>11</two>
+		<three>116</three>
+		<four>Yes(2.7184e-42)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Callithrix jacchus">
+		<Species>Callithrix jacchus</Species>
+		<one>2914958544</one>
+		<two>11</two>
+		<three>64</three>
+		<four>Yes(1.5037e-23)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Microcebus murinus">
+		<Species>Microcebus murinus</Species>
+		<one>2487409138</one>
+		<two>12</two>
+		<three>9386</three>
+		<four>Yes(0)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Otolemur garnettii">
+		<Species>Otolemur garnettii</Species>
+		<one>2519724550</one>
+		<two>11</two>
+		<three>156</three>
+		<four>Yes(4.2320e-55)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Rattus norvegicus">
+		<Species>Rattus norvegicus</Species>
+		<one>2870184193</one>
+		<two>11</two>
+		<three>12</three>
+		<four>Yes(2.5180e-05)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Mus musculus">
+		<Species>Mus musculus</Species>
+		<one>2807715301</one>
+		<two>11</two>
+		<three>170</three>
+		<four>Yes(2.9940e-60)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Oryctolagus cuniculus">
+		<Species>Oryctolagus cuniculus</Species>
+		<one>2737462810</one>
+		<two>11</two>
+		<three>6</three>
+		<four>Yes(0.0022)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Canis lupus familiaris">
+		<Species>Canis lupus familiaris</Species>
+		<one>2410976875</one>
+		<two>11</two>
+		<three>38</three>
+		<four>Yes(1.2540e-14)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Miniopterus natalensis">
+		<Species>Miniopterus natalensis</Species>
+		<one>1803099001</one>
+		<two>11</two>
+		<three>22</three>
+		<four>Yes(6.4105e-09)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Tupaia chinensis">
+		<Species>Tupaia chinensis</Species>
+		<one>2846580235</one>
+		<two>11</two>
+		<three>12</three>
+		<four>Yes(8.0937e-06)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Erinaceus europaeus">
+		<Species>Erinaceus europaeus</Species>
+		<one>2715720925</one>
+		<two>10</two>
+		<three>2</three>
+		<four>No(0.3333)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Dasypus novemcinctus">
+		<Species>Dasypus novemcinctus</Species>
+		<one>3631522711</one>
+		<two>11</two>
+		<three>22</three>
+		<four>Yes(4.6882e-09)</four>
+		<five>Yes(1)</five>
+	</LUAP>
+	<LUAP value="Loxodonta africana">
+		<Species>Loxodonta africana</Species>
+		<one>3196738102</one>
+		<two>11</two>
+		<three>14</three>
+		<four>Yes(4.2023e-06)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Echinops telfairi">
+		<Species>Echinops telfairi</Species>
+		<one>2947024286</one>
+		<two>11</two>
+		<three>4</three>
+		<four>Yes(0.0286)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Monodelphis domestica">
+		<Species>Monodelphis domestica</Species>
+		<one>3598443077</one>
+		<two>11</two>
+		<three>432</three>
+		<four>Yes(3.2045e-147)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Cyprinus carpio">
+		<Species>Cyprinus carpio</Species>
+		<one>1713658011</one>
+		<two>12</two>
+		<three>5493</three>
+		<four>Yes(0)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Xenopus tropicalis">
+		<Species>Xenopus tropicalis</Species>
+		<one>1440398454</one>
+		<two>11</two>
+		<three>18</three>
+		<four>Yes(1.7460e-07)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Nanorana parkeri">
+		<Species>Nanorana parkeri</Species>
+		<one>2053867363</one>
+		<two>12</two>
+		<three>2126</three>
+		<four>Yes(0)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Alligator mississippiensis">
+		<Species>Alligator mississippiensis</Species>
+		<one>2161730208</one>
+		<two>11</two>
+		<three>50</three>
+		<four>Yes(2.0186e-16)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Anolis carolinensis">
+		<Species>Anolis carolinensis</Species>
+		<one>1799143587</one>
+		<two>10</two>
+		<three>1</three>
+		<four>No(1)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Chelonia mydas">
+		<Species>Chelonia mydas</Species>
+		<one>2208410377</one>
+		<two>11</two>
+		<three>36</three>
+		<four>Yes(7.7450e-14)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Nipponia nippon">
+		<Species>Nipponia nippon</Species>
+		<one>1223863029</one>
+		<two>11</two>
+		<three>66</three>
+		<four>Yes(3.1698e-20)</four>
+		<five>No(1)</five>
+	</LUAP>
+	<LUAP value="Egretta garzetta">
+		<Species>Egretta garzetta</Species>
+		<one>1206501934</one>
+		<two>13</two>
+		<three>138</three>
+		<four>Yes(8.0238e-43)</four>
+		<five>No(1)</five>
+	</LUAP>
+</root>

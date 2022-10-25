@@ -1,0 +1,156 @@
+/* https://bootsnipp.com/snippets/xp0QM */
+
+.material-switch > input[type="checkbox"] {
+    display: none;   
+}
+
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative; 
+    width: 40px;  
+}
+
+.material-switch > label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 1);
+    border-radius: 8px;
+    content: '';
+    height: 16px;
+    margin-top: -8px;
+    position:absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 40px;
+}
+.material-switch > label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 24px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 24px;
+}
+.material-switch > input[type="checkbox"]:checked + label::before {
+    background: #0080ff;
+    opacity: 0.5;
+}
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: #0080ff;
+    left: 20px;
+}
+
+.magic-radio {
+	position: absolute;
+	display: none;
+}
+
+.magic-radio+label {
+	position: relative;
+	padding-left: 30px;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+.magic-radio+label:hover:before {
+	animation-duration: 0.4s;
+	animation-fill-mode: both;
+	animation-name: hover-color;
+}
+
+.magic-radio+label:before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	content: '';
+	border: 2px solid #0080ff;
+}
+
+.magic-radio+label:after {
+	position: absolute;
+	display: none;
+	content: '';
+}
+
+.magic-radio[disabled]+label {
+	cursor: not-allowed;
+	color: #e4e4e4;
+}
+
+.magic-radio:checked+label:before {
+	animation-name: none;
+}
+
+.magic-radio:checked+label:after {
+	display: block;
+}
+
+.magic-radio+label:before {
+	border-radius: 50%;
+}
+
+.magic-radio+label:after {
+	top: 4px;
+	left: 4px;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #0080ff;
+}
+
+/* https://wow.techbrood.com/fiddle/7431 */
+
+.checkboxFive label {
+	cursor: pointer;
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 0;
+	left: 0;
+	background: #eee;
+	border: 1px solid #ddd;
+}
+/**
+* Display the tick inside the checkbox
+*/
+
+.checkboxFive label:after {
+	opacity: 0.2;
+	content: '';
+	position: absolute;
+	width: 13px;
+	height: 8px;
+	background: transparent;
+	top: 6px;
+	left: 6px;
+	border: 3px solid #0080ff;
+	border-top: none;
+	border-right: none;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+/**
+* Create the hover event of the tick
+*/
+
+.checkboxFive label:hover::after {
+	opacity: 0.5;
+}
+/**
+* Create the checkbox state for the tick
+*/
+
+.checkboxFive input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
