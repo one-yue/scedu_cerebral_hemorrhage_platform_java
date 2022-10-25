@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -118,7 +118,7 @@
 
 <body class="gray-bg">
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
 
     function getTime() {
 
@@ -143,7 +143,7 @@
         document.getElementById("date1").innerHTML = newDate;//在div中写入时间
     }
 
-</script>
+</script>-->
 
 <div class="wrapper wrapper-content">
     <div>
@@ -162,40 +162,125 @@
                 style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
             <div style="margin: 10px 5px 15px">
                 <form>
-                    <label for="formGroupInputLarge">Data segment selection:</label>
+                    <!--<label for="formGroupInputLarge">Data segment selection:</label>-->
                     <div class="row form-inline row">
 
                         <div class='col-sm-6'>
                             <div class="form-group">
-                                <label for="formGroupInputLarge">Start date:</label>
-                                <!--指定 date标记-->
-                                <div class='input-group date col-xs-6' id='date_start'>
-                                    <input type='text' class="form-control" readonly="readonly"/>
-                                    <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                </div>
+                                <!--<label for="formGroupInputLarge">Start date:</label>
+                                <！--指定 date标记-->
+                                <!--<div class='input-group date col-xs-6' id='date_start'>
+                                    <！--<input type='text' class="form-control" readonly="readonly"/>-->
+                                <!--<span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>-->
                             </div>
                         </div>
 
                         <div class='col-sm-6'>
                             <div class="form-group">
-                                <label for="formGroupInputLarge">End date:</label>
-                                <!--指定 date标记-->
-                                <div class='input-group date col-xs-6' id='date_end'>
-                                    <input type='text' class="form-control" readonly="readonly"/>
-                                    <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                </div>
+                                <!--<label for="formGroupInputLarge">End date:</label>
+                                <！--指定 date标记-->
+                                <!--<div class='input-group date col-xs-6' id='date_end'>
+                                    <！--<input type='text' class="form-control" readonly="readonly"/>-->
+                                <!-- <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                     </span>
+                             </div>-->
                             </div>
                         </div>
 
+                        <form>
 
+                            <script>
+
+                                function show() {
+                                    var objtime = document.getElementsByName("time");
+                                    var objtrajectory = document.getElementsByName("trajectory");
+                                    if (objtime[0].checked) {
+                                        if (objtrajectory[0].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_1d all.jpg";
+                                        if (objtrajectory[1].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_1d trajectory bundle i.jpg";
+                                        if (objtrajectory[2].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_1d trajectory bundle ii.jpg";
+                                        if (objtrajectory[3].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_1d trajectory bundle iii.jpg";
+                                    }
+                                    if (objtime[1].checked) {
+                                        if (objtrajectory[0].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_3d all.jpg";
+                                        if (objtrajectory[1].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_3d trajectory bundle i.jpg";
+                                        if (objtrajectory[2].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_3d trajectory bundle ii.jpg";
+                                        if (objtrajectory[3].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_3d trajectory bundle iii.jpg";
+                                    } else if (objtime[2].checked) {
+                                        if (objtrajectory[0].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_7d all.jpg";
+                                        if (objtrajectory[1].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_7d trajectory bundle i.jpg";
+                                        if (objtrajectory[2].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_7d trajectory bundle ii.jpg";
+                                        if (objtrajectory[3].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_7d trajectory bundle iii.jpg";
+                                    } else if (objtime[3].checked) {
+                                        if (objtrajectory[0].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_sham all.jpg";
+                                        if (objtrajectory[1].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_sham trajectory bundle i.jpg";
+                                        if (objtrajectory[2].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_sham trajectory bundle ii.jpg";
+                                        if (objtrajectory[3].checked)
+                                            document.getElementById("heading").src = "/static/img/ivh_sham trajectory bundle iii.jpg";
+                                    }
+                                }
+
+                                function resetgraph() {
+                                    document.getElementById("heading").src = "/static/img/brain0.jpg";
+                                }
+
+                            </script>
+
+
+                            <p>Time (Please select one experimental group after IVH):
+                                <br><br>
+                                <input type="radio" name="time" value="IVH_1d">IVH_1d
+                                <br><br>
+                                <input type="radio" name="time" value="IVH_3d">IVH_3d
+                                <br><br>
+                                <input type="radio" name="time" value="IVH_7d">IVH_7d
+                                <br><br>
+                                <input type="radio" name="time" value="IVH_Sham">IVH_Sham
+                            </p>
+
+                            <br><br><br><br>
+                            <p>Trajectory bundles (Please select at least one Trajectory bundle):
+                                <input type="radio" name="trajectory" value="All">All
+                                <br><br>
+                                <input type="radio" name="trajectory" value="Trajectory bundle I">Trajectory bundle I
+                                <br><br>
+                                <input type="radio" name="trajectory" value="Trajectory bundle II">Trajectory bundle II
+                                <br><br>
+                                <input type="radio" name="trajectory" value="Trajectory bundle III">Trajectory bundle
+                                III
+                            </p>
+
+                            <p>
+                                <button type="button" onclick="show()" style="background-color:#FFC0CB"> Submit</button>
+                                <input type="reset" value="Reset" onclick="resetgraph()"
+                                       style="background-color:#87CEFA">
+                            </p>
+                            <br><br>
+                            <img id="heading" src="/static/img/brain0.jpg" width="782" height="538"/>
+
+                        </form>
                         <div class='col-sm-6'>
                             <div class="form-group">
-                                <label for="formGroupInputLarge">Infectious disease model:</label>
-                                <select name="model">
+                                <!--<label for="formGroupInputLarge">Infectious disease model:</label>-->
+                                <!--<select name="model">
                                     <option value="a"
                                     <c:if test="${model=='SIR'}"></c:if>
                                     SIR</option>
@@ -205,7 +290,7 @@
                                     <option value="c"
                                     <c:if test="${model=='SEIRQ'}"></c:if>
                                     SEIRQ</option>
-                                </select>
+                                </select>-->
                             </div>
                         </div>
                     </div>
@@ -222,56 +307,218 @@
                     -->
                 </form>
             </div>
-            <button type="button" class="btn btn-primary" onClick=""
+            <!--<button type="button" class="btn btn-primary" onClick=""
                     style="float:bottom;margin:10px 20px">Submit
             </button>
             <button type="button" class="btn btn-primary" onClick=""
                     style="float:bottom;margin:10px 20px">Reset
-            </button>
-            <i class="glyphicon glyphicon-question-sign" style="font-size:15px;float:bottom;margin:20px 20px">
-                Help</i>
+            </button>-->
+            <!--<i class="glyphicon glyphicon-question-sign" style="font-size:15px;float:bottom;margin:20px 20px">
+                Help</i>-->
         </div>
 
         <div style="margin:10px 30px">
             <div class="ibox float-e-margins">
-                <div class="ibox-title">
+                <!--<div class="ibox-title">
                     <p> Infection rate:3.450640（β) </p>
                     <p> The incidence rate of the exposed(E):0.069183(α) </p>
                     <p> Cure rate:0.012597(γ)</p>
-                </div>
+                </div>-->
             </div>
         </div>
 
+        <div
+                style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+            <div style="margin: 10px 5px 15px">
+                <form>
+                    <!--<label for="formGroupInputLarge">Data segment selection:</label>-->
+                    <div class="row form-inline row">
 
-        <div id="res" style="height:300%;margin:0 auto;width:100%"></div>
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                                <!--<label for="formGroupInputLarge">Start date:</label>
+                                <！--指定 date标记-->
+                                <!--<div class='input-group date col-xs-6' id='date_start'>
+                                    <！--<input type='text' class="form-control" readonly="readonly"/>-->
+                                <!--<span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>-->
+                            </div>
+                        </div>
 
-        <div style="margin:10px 30px">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <p>The epidemic data of infectious disease model is connected to Akshare whhich provides the latest
-                        epidemic data from January 20 to May 1 through API interface, including the number of confirmed
-                        cases, suspected cases, deaths, etc. We process the data through python scripts to adapt to the
-                        prediction model. For 14840 newly confirmed cases in Hubei Province on February 12, we
-                        apportioned the number of newly increased cases in proportion to the number of newly confirmed
-                        cases from February 7 to February 12 in the calculation process.</p>
-                    <p>Generally, people within the epidemic scope of infectious diseases are divided into the following
-                        categories:</p>
-                    <p>1. S, susceptible, refers to those who do not have the disease, but lack of immunity, and are
-                        easy to be infected after contact with the infected person;</p>
-                    <p>2. E, exposed, refers to people who have been exposed to infection but are unable to infect
-                        others temporarily, which is applicable to infectious diseases with long incubation period;</p>
-                    <p>3. I, infectious, refers to the infected person, who can be transmitted to class s members to
-                        become class E or class I members;</p>
-                    <p>4. R, recovered, refers to the person who is isolated or has immunity due to illness. If the
-                        immune period is limited, class R members can be changed into class s again.</p>
-                    <p>The differential equation of SIR model is as follows:</p>
-                    <img src="/static/img/sir.png" width="100" height="100" align="center">
-                    <p>The differential equation of SEIR model is as follows:</p>
-                    <img src="/static/img/seir.png" width="100" height="100" align="center">
-                    <p>The differential equations of seirq model we designed are as follows:</p>
-                    <img src="/static/img/seirq.png" width="300" height="300" align="center">
-                    <p>The parameters in the infectious disease model are explained as follows:</p>
-                    <img src="/static/img/para_explain.png" width="300" height="300" align="center">
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                                <!--<label for="formGroupInputLarge">End date:</label>
+                                <！--指定 date标记-->
+                                <!--<div class='input-group date col-xs-6' id='date_end'>
+                                    <！--<input type='text' class="form-control" readonly="readonly"/>-->
+                                <!-- <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                     </span>
+                             </div>-->
+                            </div>
+                        </div>
+                        <p>Cell subtype analysis (Please select at least 2 brain regions from upon trajectory bundle):
+                        <form>
+                            <br><br>
+                            <select>
+                                <option value="VL">VL</option>
+                                <option value="fxs">fxs</option>
+                                <option value="cpd">cpd</option>
+                                <option value="COA">COA</option>
+                                <option value="CTXsp">CTXsp</option>
+                                <option value="PIR">PIR</option>
+                                <option value="CA3">CA3</option>
+                                <option value="HY">HY</option>
+                                <option value="HYL">HYL</option>
+                                <option value="TH">TH</option>
+                                <option value="MB">MB</option>
+                                <option value="CA1">CA1</option>
+                                <option value="DG">DG</option>
+                                <option value="RSP">RSP</option>
+                                <option value="I">I</option>
+                                <option value="II">II</option>
+                                <option value="III">III</option>
+                                <option value="IV">IV</option>
+                                <option value="V">V</option>
+                                <option value="VIa">VIa</option>
+                                <option value="VIb">MB</option>
+                            </select> →
+
+                            <select>
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="opel">Opel</option>
+                                <option value="audi">Audi</option>
+                            </select> →
+
+                            <select>
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="opel">Opel</option>
+                                <option value="audi">Audi</option>
+                            </select> →
+
+                            <select>
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="opel">Opel</option>
+                                <option value="audi">Audi</option>
+                            </select> →
+
+                            <select>
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="opel">Opel</option>
+                                <option value="audi">Audi</option>
+                            </select> →
+
+                            <select>
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="opel">Opel</option>
+                                <option value="audi">Audi</option>
+                            </select> →
+
+                            <select>
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="opel">Opel</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                            <br><br>
+                            <p>
+                                <input type="submit" value="Submit" style="background-color:#FFC0CB">
+                                <input type="reset" value="Reset" style="background-color:#87CEFA">
+                            </p>
+
+                        </form>
+                        <br>
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--<div id="res" style="height:300%;margin:0 auto;width:100%"></div>-->
+
+        <div
+                style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+            <div style="margin: 10px 5px 15px">
+                <form>
+                    <!--<label for="formGroupInputLarge">Data segment selection:</label>-->
+                    <div class="row form-inline row">
+
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                                <!--<label for="formGroupInputLarge">Start date:</label>
+                                <！--指定 date标记-->
+                                <!--<div class='input-group date col-xs-6' id='date_start'>
+                                    <！--<input type='text' class="form-control" readonly="readonly"/>-->
+                                <!--<span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                            </div>-->
+                            </div>
+                        </div>
+
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                                <!--<label for="formGroupInputLarge">End date:</label>
+                                <！--指定 date标记-->
+                                <!--<div class='input-group date col-xs-6' id='date_end'>
+                                    <！--<input type='text' class="form-control" readonly="readonly"/>-->
+                                <!-- <span class="input-group-addon">
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                     </span>
+                             </div>-->
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!--<button type="button" class="btn btn-primary" onClick=""
+                            style="float:bottom;margin:10px 20px">Submit
+                    </button>
+                    <button type="button" class="btn btn-primary" onClick=""
+                            style="float:bottom;margin:10px 20px">Reset
+                    </button>-->
+                    <!--<i class="glyphicon glyphicon-question-sign" style="font-size:15px;float:bottom;margin:20px 20px">
+                        Help</i>-->
+            </div>
+
+            <div style="margin:10px 30px">
+                <div class="ibox float-e-margins">
+                    <!--<div class="ibox-title">-->
+                    <p>Locus gene set download
+                        <!--<p>The epidemic data of infectious disease model is connected to Akshare whhich provides the latest
+                            epidemic data from January 20 to May 1 through API interface, including the number of confirmed
+                            cases, suspected cases, deaths, etc. We process the data through python scripts to adapt to the
+                            prediction model. For 14840 newly confirmed cases in Hubei Province on February 12, we
+                            apportioned the number of newly increased cases in proportion to the number of newly confirmed
+                            cases from February 7 to February 12 in the calculation process.</p>
+                        <p>Generally, people within the epidemic scope of infectious diseases are divided into the following
+                            categories:</p>
+                        <p>1. S, susceptible, refers to those who do not have the disease, but lack of immunity, and are
+                            easy to be infected after contact with the infected person;</p>
+                        <p>2. E, exposed, refers to people who have been exposed to infection but are unable to infect
+                            others temporarily, which is applicable to infectious diseases with long incubation period;</p>
+                        <p>3. I, infectious, refers to the infected person, who can be transmitted to class s members to
+                            become class E or class I members;</p>
+                        <p>4. R, recovered, refers to the person who is isolated or has immunity due to illness. If the
+                            immune period is limited, class R members can be changed into class s again.</p>
+                        <p>The differential equation of SIR model is as follows:</p>
+                        <img src="/static/img/sir.png" width="100" height="100" align="center">
+                        <p>The differential equation of SEIR model is as follows:</p>
+                        <img src="/static/img/seir.png" width="100" height="100" align="center">
+                        <p>The differential equations of seirq model we designed are as follows:</p>
+                        <img src="/static/img/seirq.png" width="300" height="300" align="center">
+                        <p>The parameters in the infectious disease model are explained as follows:</p>
+                        <img src="/static/img/para_explain.png" width="300" height="300" align="center">-->
+
                 </div>
 
             </div>
@@ -282,7 +529,7 @@
 </div>
 
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
@@ -294,8 +541,7 @@
 <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
-
-
+-->
 <script type="text/javascript">
 
     var dom = document.getElementById("res");
