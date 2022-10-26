@@ -150,9 +150,7 @@
         <ul class="breadcrumb" style="margin:0px 300px -10px 300px;font:bold 15px Georgia, serif">
             <li><a href="home.html"><i class="icon home"></i>Home</a></li>
             <i class="right chevron icon divider"></i>
-            <li class="active"><a href="epidemic_prediction.html">Infectious disease model</a></li>
-            <i class="right chevron icon divider"></i>
-            <li class="active">Epidemic prediction</li>
+            <li class="active">Cell SubType Analysis</li>
         </ul>
     </div>
 
@@ -192,59 +190,6 @@
                         </div>
 
                         <form>
-
-                            <script>
-
-                                function show() {
-                                    var objtime = document.getElementsByName("time");
-                                    var objtrajectory = document.getElementsByName("trajectory");
-                                    if (objtime[0].checked) {
-                                        if (objtrajectory[0].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_1d all.jpg";
-                                        if (objtrajectory[1].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_1d trajectory bundle i.jpg";
-                                        if (objtrajectory[2].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_1d trajectory bundle ii.jpg";
-                                        if (objtrajectory[3].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_1d trajectory bundle iii.jpg";
-                                    }
-                                    if (objtime[1].checked) {
-                                        if (objtrajectory[0].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_3d all.jpg";
-                                        if (objtrajectory[1].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_3d trajectory bundle i.jpg";
-                                        if (objtrajectory[2].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_3d trajectory bundle ii.jpg";
-                                        if (objtrajectory[3].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_3d trajectory bundle iii.jpg";
-                                    } else if (objtime[2].checked) {
-                                        if (objtrajectory[0].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_7d all.jpg";
-                                        if (objtrajectory[1].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_7d trajectory bundle i.jpg";
-                                        if (objtrajectory[2].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_7d trajectory bundle ii.jpg";
-                                        if (objtrajectory[3].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_7d trajectory bundle iii.jpg";
-                                    } else if (objtime[3].checked) {
-                                        if (objtrajectory[0].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_sham all.jpg";
-                                        if (objtrajectory[1].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_sham trajectory bundle i.jpg";
-                                        if (objtrajectory[2].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_sham trajectory bundle ii.jpg";
-                                        if (objtrajectory[3].checked)
-                                            document.getElementById("heading").src = "/static/img/ivh_sham trajectory bundle iii.jpg";
-                                    }
-                                }
-
-                                function resetgraph() {
-                                    document.getElementById("heading").src = "/static/img/brain0.jpg";
-                                }
-
-                            </script>
-
-
                             <p>Time (Please select one experimental group after IVH):
                                 <br><br>
                                 <input type="radio" name="time" value="IVH_1d">IVH_1d
@@ -260,11 +205,11 @@
                             <p>Trajectory bundles (Please select at least one Trajectory bundle):
                                 <input type="radio" name="trajectory" value="All">All
                                 <br><br>
-                                <input type="radio" name="trajectory" value="Trajectory bundle I">Trajectory bundle I
+                                <input type="radio" name="trajectory" value="Trajectory_bundle_1">Trajectory bundle I
                                 <br><br>
-                                <input type="radio" name="trajectory" value="Trajectory bundle II">Trajectory bundle II
+                                <input type="radio" name="trajectory" value="Trajectory_bundle_2">Trajectory bundle II
                                 <br><br>
-                                <input type="radio" name="trajectory" value="Trajectory bundle III">Trajectory bundle
+                                <input type="radio" name="trajectory" value="Trajectory_bundle_3">Trajectory bundle
                                 III
                             </p>
 
@@ -274,166 +219,59 @@
                                        style="background-color:#87CEFA">
                             </p>
                             <br><br>
+                            这里是放图片的位置
                             <img id="heading" src="/static/img/brain0.jpg" width="782" height="538"/>
 
                         </form>
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <!--<label for="formGroupInputLarge">Infectious disease model:</label>-->
-                                <!--<select name="model">
-                                    <option value="a"
-                                    <c:if test="${model=='SIR'}"></c:if>
-                                    SIR</option>
-                                    <option value="b"
-                                    <c:if test="${model=='SEIR'}"></c:if>
-                                    SEIR</option>
-                                    <option value="c"
-                                    <c:if test="${model=='SEIRQ'}"></c:if>
-                                    SEIRQ</option>
-                                </select>-->
-                            </div>
-                        </div>
                     </div>
-
-                    <!--
-                                                <div class='col-sm-6'>
-                                                    <div class="form-group">
-                                                        <label for="formGroupInputLarge">Forecast duration:</label>
-                                                        <div class='input-group date col-xs-6' id='time'>
-                                                            <input type='text' class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                    -->
                 </form>
             </div>
-            <!--<button type="button" class="btn btn-primary" onClick=""
-                    style="float:bottom;margin:10px 20px">Submit
-            </button>
-            <button type="button" class="btn btn-primary" onClick=""
-                    style="float:bottom;margin:10px 20px">Reset
-            </button>-->
-            <!--<i class="glyphicon glyphicon-question-sign" style="font-size:15px;float:bottom;margin:20px 20px">
-                Help</i>-->
         </div>
 
-        <div style="margin:10px 30px">
-            <div class="ibox float-e-margins">
-                <!--<div class="ibox-title">
-                    <p> Infection rate:3.450640（β) </p>
-                    <p> The incidence rate of the exposed(E):0.069183(α) </p>
-                    <p> Cure rate:0.012597(γ)</p>
-                </div>-->
-            </div>
-        </div>
 
-        <div
-                style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+        <div style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
             <div style="margin: 10px 5px 15px">
                 <form>
                     <!--<label for="formGroupInputLarge">Data segment selection:</label>-->
                     <div class="row form-inline row">
-
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <!--<label for="formGroupInputLarge">Start date:</label>
-                                <！--指定 date标记-->
-                                <!--<div class='input-group date col-xs-6' id='date_start'>
-                                    <！--<input type='text' class="form-control" readonly="readonly"/>-->
-                                <!--<span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                            </div>-->
-                            </div>
-                        </div>
-
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <!--<label for="formGroupInputLarge">End date:</label>
-                                <！--指定 date标记-->
-                                <!--<div class='input-group date col-xs-6' id='date_end'>
-                                    <！--<input type='text' class="form-control" readonly="readonly"/>-->
-                                <!-- <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                     </span>
-                             </div>-->
-                            </div>
-                        </div>
                         <p>Cell subtype analysis (Please select at least 2 brain regions from upon trajectory bundle):
-                        <form>
+                        <form id="selectPoint">
                             <br><br>
-                            <select>
-                                <option value="VL">VL</option>
-                                <option value="fxs">fxs</option>
-                                <option value="cpd">cpd</option>
-                                <option value="COA">COA</option>
-                                <option value="CTXsp">CTXsp</option>
-                                <option value="PIR">PIR</option>
-                                <option value="CA3">CA3</option>
-                                <option value="HY">HY</option>
-                                <option value="HYL">HYL</option>
-                                <option value="TH">TH</option>
-                                <option value="MB">MB</option>
-                                <option value="CA1">CA1</option>
-                                <option value="DG">DG</option>
-                                <option value="RSP">RSP</option>
-                                <option value="I">I</option>
-                                <option value="II">II</option>
-                                <option value="III">III</option>
-                                <option value="IV">IV</option>
-                                <option value="V">V</option>
-                                <option value="VIa">VIa</option>
-                                <option value="VIb">MB</option>
-                            </select> →
+                            <label for="select1"></label><select id="select1">
+                            <option value="">--point--</option>
+                        </select> →
 
-                            <select>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
-                            </select> →
+                            <label for="select2"></label><select id="select2">
+                            <option value="">--point--</option>
+                        </select> →
 
-                            <select>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
-                            </select> →
+                            <label for="select3"></label><select id="select3">
+                            <option value="">--point--</option>
+                        </select> →
 
-                            <select>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
-                            </select> →
+                            <label for="select4"></label><select id="select4">
+                            <option value="">--point--</option>
+                        </select> →
 
-                            <select>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
-                            </select> →
+                            <label for="select5"></label><select id="select5">
+                            <option value="">--point--</option>
+                        </select> →
 
-                            <select>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
-                            </select> →
-
-                            <select>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
-                            </select>
-                            <br><br>
-                            <p>
-                                <input type="submit" value="Submit" style="background-color:#FFC0CB">
-                                <input type="reset" value="Reset" style="background-color:#87CEFA">
-                            </p>
-
+                            <label for="select6"></label><select id="select6">
+                            <option value="">--point--</option>
+                        </select>
                         </form>
+
+                        <br><br>
+                        <p>
+                            <input type="button" value="Submit" onclick="getTop30Data()"
+                                   style="background-color:#FFC0CB">
+                            <input type="reset" value="Reset" style="background-color:#87CEFA">
+                        </p>
+
+                        <p>这里是echarts</p>
+
+
                         <br>
                         <div class='col-sm-6'>
                             <div class="form-group">
@@ -493,30 +331,31 @@
             <div style="margin:10px 30px">
                 <div class="ibox float-e-margins">
                     <!--<div class="ibox-title">-->
-                    <input type="button" id="postBtn" value="查询"></input>
+                    <input type="button" id="postBtn" value="查询"/>
                     <script>
-                        $(document).ready(function(){
-                            $("#postBtn").click(function(){
+                        $(document).ready(function () {
+                            $("#postBtn").click(function () {
                                 $.ajax({
                                     type: "post",  //或者GET
                                     url: '/cell_subtype_analysis/file',
                                     contentType: 'application/json',
-                                    data:JSON.stringify( {
+                                    data: JSON.stringify({
                                         time: 'IVH_1d',
                                         bundles: 'Trajectory_bundle_2',
                                         trail: ['VL', 'fxs', 'CA1']
                                     }),
-                                    success: function (res) {
-                                        if (res === '登录成功') {
-
-                                        }
+                                    success: function (data, status, xhr) {
+                                        console.log("Download file DONE!");
+                                        console.log(data); // ajax方式请求的数据只能存放在javascipt内存空间，可以通过javascript访问，但是无法保存到硬盘
+                                        console.log(status);
+                                        console.log(xhr);
+                                        console.log("=====================");
                                     },
-                                    error:function(){
+                                    error: function () {
 
                                         alert('请求失败');
                                     }
                                 })
-
                             });
                         });
                     </script>
@@ -547,8 +386,149 @@
 -->
 
 <script>
+    var time
+    var trajectory
+    var trailPoint = new Array(6)
+
+    function show() {
+        var objtime = document.getElementsByName("time");
+        var objtrajectory = document.getElementsByName("trajectory");
+        for (var i = 0, len1 = objtime.length; i < len1; i++) {
+            for (var j = 0, len2 = objtrajectory.length; j < len2; j++) {
+                if (objtime[i].checked && objtrajectory[j].checked) {
+                    time = objtime[i].value
+                    trajectory = objtrajectory[j].value
+                    console.log(time)
+                    console.log(trajectory)
+                }
+            }
+        }
+        if (objtime[0].checked) {
+            if (objtrajectory[0].checked)
+                document.getElementById("heading").src = "/static/img/ivh_1d all.jpg";
+            if (objtrajectory[1].checked)
+                document.getElementById("heading").src = "/static/img/ivh_1d trajectory bundle i.jpg";
+            if (objtrajectory[2].checked)
+                document.getElementById("heading").src = "/static/img/ivh_1d trajectory bundle ii.jpg";
+            if (objtrajectory[3].checked)
+                document.getElementById("heading").src = "/static/img/ivh_1d trajectory bundle iii.jpg";
+        }
+        if (objtime[1].checked) {
+            if (objtrajectory[0].checked)
+                document.getElementById("heading").src = "/static/img/ivh_3d all.jpg";
+            if (objtrajectory[1].checked)
+                document.getElementById("heading").src = "/static/img/ivh_3d trajectory bundle i.jpg";
+            if (objtrajectory[2].checked)
+                document.getElementById("heading").src = "/static/img/ivh_3d trajectory bundle ii.jpg";
+            if (objtrajectory[3].checked)
+                document.getElementById("heading").src = "/static/img/ivh_3d trajectory bundle iii.jpg";
+        } else if (objtime[2].checked) {
+            if (objtrajectory[0].checked)
+                document.getElementById("heading").src = "/static/img/ivh_7d all.jpg";
+            if (objtrajectory[1].checked)
+                document.getElementById("heading").src = "/static/img/ivh_7d trajectory bundle i.jpg";
+            if (objtrajectory[2].checked)
+                document.getElementById("heading").src = "/static/img/ivh_7d trajectory bundle ii.jpg";
+            if (objtrajectory[3].checked)
+                document.getElementById("heading").src = "/static/img/ivh_7d trajectory bundle iii.jpg";
+        } else if (objtime[3].checked) {
+            if (objtrajectory[0].checked)
+                document.getElementById("heading").src = "/static/img/ivh_sham all.jpg";
+            if (objtrajectory[1].checked)
+                document.getElementById("heading").src = "/static/img/ivh_sham trajectory bundle i.jpg";
+            if (objtrajectory[2].checked)
+                document.getElementById("heading").src = "/static/img/ivh_sham trajectory bundle ii.jpg";
+            if (objtrajectory[3].checked)
+                document.getElementById("heading").src = "/static/img/ivh_sham trajectory bundle iii.jpg";
+        }
+    }
+
+    function resetgraph() {
+        document.getElementById("heading").src = "/static/img/brain0.jpg";
+    }
+
+    function setFun(elementId) {
+        var value = ["VL", "fxs", "cpd", "COA", "CTXsp", "PIR", "CA3", "HY", "HYL", "TH", "MB", "CA1", "DG", "RSP", "I", "II,III,IV", "V,VIa,VIb"];
+        var select = document.getElementById(elementId);
+        select.length = 1;
+        select.options[0].selected = true;
+        for (var x = 0; x < value.length; x++) {
+            var option = document.createElement("option");
+            option.setAttribute("value", value[x]);
+            option.appendChild(document.createTextNode(value[x]));
+            select.appendChild(option);
+        }
+    }
+
+    function getTop30Data() {
+        getSelectValue()
+        console.log(time)
+        console.log(trajectory)
+        console.log(trailPoint)
+        $.ajax({
+            type: "post",  //或者GET
+            url: '/cell_subtype_analysis/data',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                time: time,
+                bundles: trajectory,
+                trail: trailPoint
+            }),
+            success: function (data, status, xhr) {
+                console.log(data); // ajax方式请求的数据只能存放在javascipt内存空间，可以通过javascript访问，但是无法保存到硬盘
+                console.log(status);
+                console.log(xhr);
+                console.log("=====================");
+            },
+            error: function () {
+
+                alert('请求失败');
+            }
+        })
+    }
+
+    function getSelectValue() {
+        var myselect1 = document.getElementById("select1")
+        var index1 = myselect1.selectedIndex
+        trailPoint[0] = myselect1.options[index1].value
+
+        var myselect2 = document.getElementById("select2")
+        var index2 = myselect2.selectedIndex
+        trailPoint[1] = myselect2.options[index2].value
+
+        var myselect3 = document.getElementById("select3")
+        var index3 = myselect3.selectedIndex
+        trailPoint[2] = myselect3.options[index3].value
+
+        var myselect4 = document.getElementById("select4")
+        var index4 = myselect4.selectedIndex
+        trailPoint[3] = myselect4.options[index4].value
+
+        var myselect5 = document.getElementById("select5")
+        var index5 = myselect5.selectedIndex
+        trailPoint[4] = myselect5.options[index5].value
+
+        var myselect6 = document.getElementById("select6")
+        var index6 = myselect6.selectedIndex
+        trailPoint[5] = myselect6.options[index6].value
+
+        alert(trailPoint)
+    }
+
+    window.onload = function () {
+        setFun("select1")
+        setFun("select2")
+        setFun("select3")
+        setFun("select4")
+        setFun("select5")
+        setFun("select6")
+    }
+
+</script>
+
+<script>
     function loadDoc() {
-        var that=this;
+        var that = this;
         that.loading = true;   //使用v-loading加载
         var url = 'http://localhost:8090//cell_subtype_analysis/file';
         var xhr = new XMLHttpRequest();

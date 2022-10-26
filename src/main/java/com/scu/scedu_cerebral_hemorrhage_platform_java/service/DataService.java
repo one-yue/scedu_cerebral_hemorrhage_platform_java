@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class DataService {
@@ -71,7 +72,7 @@ public class DataService {
         List<List<String>> result = new ArrayList<>();
         for (String resultStr : resultListStr) {
             String[] trailList = resultStr.split("-");
-            result.add(Arrays.stream(trailList).toList());
+            result.add(Arrays.stream(trailList).collect(Collectors.toList()));
         }
 
         return result;

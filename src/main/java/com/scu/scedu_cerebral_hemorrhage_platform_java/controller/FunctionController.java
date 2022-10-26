@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,7 +123,7 @@ public class FunctionController {
         try {
             outStr = response.getOutputStream();
             buff = new BufferedOutputStream(outStr);
-            buff.write(text.getBytes("UTF-8"));
+            buff.write(text.getBytes(StandardCharsets.UTF_8));
             buff.flush();
             buff.close();
         } catch (Exception e) {
