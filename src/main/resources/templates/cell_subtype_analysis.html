@@ -118,33 +118,6 @@
 
 <body class="gray-bg">
 
-<!--<script type="text/javascript">
-
-    function getTime() {
-
-        var dateObj = new Date();
-
-        var year = dateObj.getFullYear();
-
-        var month = dateObj.getMonth() + 1;
-
-        var date = dateObj.getDate();
-
-        if (month < 10) {
-            month = "0" + month;
-        }
-
-        if (date < 10) {
-            date = "0" + date;
-        }
-
-        var newDate = year + '-' + month + '-' + date;
-        return newDate;
-        document.getElementById("date1").innerHTML = newDate;//在div中写入时间
-    }
-
-</script>-->
-
 <div class="wrapper wrapper-content">
     <div>
         <ul class="breadcrumb" style="margin:0px 300px -10px 300px;font:bold 15px Georgia, serif">
@@ -162,33 +135,6 @@
                 <form>
                     <!--<label for="formGroupInputLarge">Data segment selection:</label>-->
                     <div class="row form-inline row">
-
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <!--<label for="formGroupInputLarge">Start date:</label>
-                                <！--指定 date标记-->
-                                <!--<div class='input-group date col-xs-6' id='date_start'>
-                                    <！--<input type='text' class="form-control" readonly="readonly"/>-->
-                                <!--<span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                            </div>-->
-                            </div>
-                        </div>
-
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <!--<label for="formGroupInputLarge">End date:</label>
-                                <！--指定 date标记-->
-                                <!--<div class='input-group date col-xs-6' id='date_end'>
-                                    <！--<input type='text' class="form-control" readonly="readonly"/>-->
-                                <!-- <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                     </span>
-                             </div>-->
-                            </div>
-                        </div>
-
                         <form>
                             <p>Time (Please select one experimental group after IVH):
                                 <br><br>
@@ -215,11 +161,11 @@
 
                             <p>
                                 <button type="button" onclick="show()" style="background-color:#FFC0CB"> Submit</button>
-                                <input type="reset" value="Reset" onclick="resetgraph()"
+                                <input type="reset" value="Reset" onclick="resetGraph()"
                                        style="background-color:#87CEFA">
                             </p>
                             <br><br>
-                            <img id="heading" src="http://162.14.117.72/images/1.jpg" width="782" height="538"/>
+                            <img id="heading" src="http://162.14.117.72/images/blank.jpg" width="782" height="538"/>
 
                         </form>
                     </div>
@@ -236,27 +182,27 @@
                         <p>Cell subtype analysis (Please select at least 2 brain regions from upon trajectory bundle):
                         <form id="selectPoint">
                             <br><br>
-                            <label for="select1"></label><select id="select1">
+                            <label for="select1"></label><select id="select1" onchange="getSelectValue()">
                             <option value="">--point--</option>
                         </select> →
 
-                            <label for="select2"></label><select id="select2">
+                            <label for="select2"></label><select id="select2" onchange="getSelectValue()">
                             <option value="">--point--</option>
                         </select> →
 
-                            <label for="select3"></label><select id="select3">
+                            <label for="select3"></label><select id="select3" onchange="getSelectValue()">
                             <option value="">--point--</option>
                         </select> →
 
-                            <label for="select4"></label><select id="select4">
+                            <label for="select4"></label><select id="select4" onchange="getSelectValue()">
                             <option value="">--point--</option>
                         </select> →
 
-                            <label for="select5"></label><select id="select5">
+                            <label for="select5"></label><select id="select5" onchange="getSelectValue()">
                             <option value="">--point--</option>
                         </select> →
 
-                            <label for="select6"></label><select id="select6">
+                            <label for="select6"></label><select id="select6" onchange="getSelectValue()">
                             <option value="">--point--</option>
                         </select>
                         </form>
@@ -265,10 +211,11 @@
                         <p>
                             <input type="button" value="Submit" onclick="getTop30Data()"
                                    style="background-color:#FFC0CB">
-                            <input type="reset" value="Reset" style="background-color:#87CEFA">
+                            <input type="button" value="Reset" onclick="resetTrailData()"
+                                   style="background-color:#87CEFA">
                         </p>
 
-                        <p>这里是echarts</p>
+                        <p id="echartsData">这里是echarts</p>
 
 
                         <br>
@@ -285,32 +232,18 @@
         <div style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
             <div style="margin:10px 30px">
                 <div class="ibox float-e-margins">
-                    <input type="button" id="postBtn" value="下载数据" onclick="downFile()"/>
+                    <input type="button" id="postBtn2" value="download data"
+                           onclick="inputDownloadEvt('get', '/cell_subtype_analysis/file')"/>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
-
-
-<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/static/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
--->
-
 <script>
-    var time
-    var trajectory
-    var trailPoint = new Array(6)
+    var time = ""
+    var trajectory = ""
+    var trailPoint = ["", "", "", "", "", ""]
 
     function show() {
         var objtime = document.getElementsByName("time");
@@ -328,29 +261,70 @@
         document.getElementById("heading").src = "http://162.14.117.72/images/" + time + "_" + trajectory + ".jpg";
     }
 
-    function resetgraph() {
-        document.getElementById("heading").src = "http://162.14.117.72/images/1.jpg";
+    function resetGraph() {
+        //重置数据
+        time = undefined
+        trajectory = undefined
+        document.getElementById("heading").src = "http://162.14.117.72/images/blank.jpg";
     }
 
-    function setFun(elementId) {
-        var value = ["VL", "fxs", "cpd", "COA", "CTXsp", "PIR", "CA3", "HY", "HYL", "TH", "MB", "CA1", "DG", "RSP", "I", "II,III,IV", "V,VIa,VIb"];
+    function setFun(elementId, nowPoint, lastPoint) {
+        var value = []
+        if (time === "" || trajectory === "") {
+            value = []
+        } else {
+            // value = ["VL", "fxs", "cpd", "COA", "CTXsp", "PIR", "CA3", "HY", "HYL", "TH", "MB", "CA1", "DG", "RSP", "I", "II,III,IV", "V,VIa,VIb"];
+            value = getNextData(lastPoint)
+        }
+        console.log("value" + value)
+        console.log("trailPoint" + trailPoint)
+        //根据上一个节点，生成下拉列表
         var select = document.getElementById(elementId);
         select.length = 1;
         select.options[0].selected = true;
         for (var x = 0; x < value.length; x++) {
             var option = document.createElement("option");
             option.setAttribute("value", value[x]);
+            if (value[x] === nowPoint) {
+                option.setAttribute("selected", "selected");
+            }
             option.appendChild(document.createTextNode(value[x]));
             select.appendChild(option);
         }
     }
 
+    var result
+
+    function getNextData(lastPoint) {
+        $.ajax({
+            async: false,
+            type: "get",  //或者GET
+            url: '/cell_subtype_analysis/next_point?time=' + time + '&bundles=' + trajectory + '&lastPoint=' + lastPoint,
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data); // ajax方式请求的数据只能存放在javascipt内存空间，可以通过javascript访问，但是无法保存到硬盘
+                result = data.body
+                console.log(result)
+            },
+            error: function () {
+                alert('Bad request! Please try again later.');
+            }
+        })
+        console.log("zheli shikong:" + result)
+        return result
+    }
+
     function getTop30Data() {
+        if (time === "" || trajectory === "") {
+            alert("Please select time and Trajectory bundles")
+            return
+        }
         getSelectValue()
         console.log(time)
         console.log(trajectory)
         console.log(trailPoint)
         $.ajax({
+            async: false,
             type: "post",  //或者GET
             url: '/cell_subtype_analysis/data',
             contentType: 'application/json',
@@ -360,14 +334,14 @@
                 trail: trailPoint
             }),
             success: function (data, status, xhr) {
+                document.getElementById("echartsData").innerHTML = JSON.stringify(data);
                 console.log(data); // ajax方式请求的数据只能存放在javascipt内存空间，可以通过javascript访问，但是无法保存到硬盘
                 console.log(status);
                 console.log(xhr);
                 console.log("=====================");
             },
             error: function () {
-
-                alert('请求失败');
+                alert('Bad request! Please try again later.');
             }
         })
     }
@@ -375,6 +349,7 @@
     function getSelectValue() {
         var myselect1 = document.getElementById("select1")
         var index1 = myselect1.selectedIndex
+        console.log(index1)
         trailPoint[0] = myselect1.options[index1].value
 
         var myselect2 = document.getElementById("select2")
@@ -398,9 +373,10 @@
         trailPoint[5] = myselect6.options[index6].value
     }
 
-    function downFile(){
+    function downFile() {
         //校验参数
         $.ajax({
+            async: false,
             type: "post",  //或者GET
             url: '/cell_subtype_analysis/file',
             contentType: 'application/json',
@@ -415,127 +391,107 @@
                 }
             },
             error: function () {
-                alert('请求失败');
+                alert('Bad request! Please try again later.');
             }
         })
     }
 
-    window.onload = function () {
-        setFun("select1")
-        setFun("select2")
-        setFun("select3")
-        setFun("select4")
-        setFun("select5")
-        setFun("select6")
+    function ajaxRequest(method, url, type) {
+        return new Promise((resolve, reject) => {
+            const req = new XMLHttpRequest();
+            req.open(method, url, true);
+            req.responseType = type;
+            req.onreadystatechange = () => {
+                // readyState == 4说明请求已完成
+                if (req.readyState === 4) {
+                    const data = req.response;
+                    // 获取文件名
+                    const content = req.getResponseHeader('Content-Disposition');
+                    const fileName = content && content.split(';')[1].split('filename=')[1];
+                    if (req.status === 200 || req.status === 304) {
+                        resolve({data, fileName});
+                    } else {
+                        reject(data);
+                    }
+                }
+            };
+            // 发送数据
+            req.send();
+        });
     }
 
-</script>
 
-<script>
-    function loadDoc() {
-        var that = this;
-        that.loading = true;   //使用v-loading加载
-        var url = 'http://localhost:8090//cell_subtype_analysis/file';
-        var xhr = new XMLHttpRequest();
-        xhr.open('get', url, true);
-        xhr.responseType = "blob";    // 返回类型blob
-        // 定义请求完成的处理函数
-        xhr.onload = function () {
-            // 请求完成
-            if (this.status === 200) {
-                // 返回200
-                var blob = this.response;
-                var reader = new FileReader();
-                reader.readAsDataURL(blob);    // 转换为base64，可以直接放入标签href
-                reader.onload = function (e) {
-                    // 创建一个a标签用于下载
-                    var a = document.createElement('a');
-                    a.download = 'abc.txt';  //定义文件名称和文件类型
-                    a.href = e.target.result;
-                    $("body").append(a);
-                    a.click();
-                    $(a).remove();
-                    that.loading = false;   //下载完成，将loading加载关闭
-                }
-            }
+    function resetTrailData() {
+        for (var i = 0; i < trailPoint.length; i++) {
+            trailPoint[i] = ""
         }
-        // 发送ajax请求
-        xhr.send();
+
+        var myselect1 = document.getElementById("select1")
+        var index1 = myselect1.selectedIndex
+        myselect1.options[index1].value = ""
+
+        var myselect2 = document.getElementById("select2")
+        var index2 = myselect2.selectedIndex
+        myselect2.options[index2].value = ""
+
+        var myselect3 = document.getElementById("select3")
+        var index3 = myselect3.selectedIndex
+        myselect3.options[index3].value = ""
+
+        var myselect4 = document.getElementById("select4")
+        var index4 = myselect4.selectedIndex
+        myselect4.options[index4].value = ""
+
+        var myselect5 = document.getElementById("select5")
+        var index5 = myselect5.selectedIndex
+        myselect5.options[index5].value = ""
+
+        var myselect6 = document.getElementById("select6")
+        var index6 = myselect6.selectedIndex
+        myselect6.options[index6].value = ""
+
     }
-</script>
 
-<script type="text/javascript">
+    window.onclick = function () {
+        setFun("select1", trailPoint[0], "head")
+        setFun("select2", trailPoint[1], trailPoint[0])
+        setFun("select3", trailPoint[2], trailPoint[1])
+        setFun("select4", trailPoint[3], trailPoint[2])
+        setFun("select5", trailPoint[4], trailPoint[3])
+        setFun("select6", trailPoint[5], trailPoint[4])
+    }
 
-    var dom = document.getElementById("res");
-    var myChart = echarts.init(dom);
-    var app = {};
+    function inputDownloadEvt(method, url) {
+        //组装keys
+        var size = 2 + trailPoint.length
+        var paramsKey = new Array(size)
+        var paramsValue = new Array(size)
+        paramsKey[0] = 'time'
+        paramsValue[0] = time
+        paramsKey[1] = "bundles"
+        paramsValue[1] = trajectory
+        for (var i = 2; i < size; i++) {
+            paramsKey[i] = "point"
+            paramsValue[i] = trailPoint[i - 2]
+        }
+        console.log(paramsKey)
+        console.log(paramsValue)
+        const form = document.createElement('form');
+        form.style.display = 'none';
+        form.setAttribute('target', '_blank');
+        form.setAttribute('method', method);
+        form.setAttribute('action', url);
 
-
-    option = null;
-
-    option = {
-
-        title: {
-            text: 'Epidemic transmission prediction',
-            subtext: '2019nCoVAS'
-        },
-
-        legend: {
-            top: 32,
-            left: 'center',
-            data: ['Real confirmed cases', 'Predicted result'],
-            textStyle: { //图例文字的样式
-                fontSize: 16
-            },
-        },
-        tooltip: {
-            trigger: 'item',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            },
-
-        },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: ['2020-01-20', '2020-01-21', '2020-01-22', '2020-01-23', '2020-01-24', '2020-01-25', '2020-01-26', '2020-01-27', '2020-01-28', '2020-01-29', '2020-01-30', '2020-01-31', '2020-02-01', '2020-02-02', '2020-02-03', '2020-02-04', '2020-02-05', '2020-02-06', '2020-02-07', '2020-02-08', '2020-02-09', '2020-02-10', '2020-02-11', '2020-02-12', '2020-02-13', '2020-02-14', '2020-02-15', '2020-02-16', '2020-02-17', '2020-02-18', '2020-02-19', '2020-02-20', '2020-02-21', '2020-02-22', '2020-02-23', '2020-02-24', '2020-02-25', '2020-02-26', '2020-02-27', '2020-02-28', '2020-02-29', '2020-03-01', '2020-03-02', '2020-03-03', '2020-03-04', '2020-03-05', '2020-03-06', '2020-03-07', '2020-03-08', '2020-03-09', '2020-03-10', '2020-03-11', '2020-03-12', '2020-03-13', '2020-03-14', '2020-03-15', '2020-03-16', '2020-03-17', '2020-03-18', '2020-03-19', '2020-03-20', '2020-03-21', '2020-03-22', '2020-03-23', '2020-03-24', '2020-03-25', '2020-03-26', '2020-03-27', '2020-03-28', '2020-03-29', '2020-03-30', '2020-03-31', '2020-04-01', '2020-04-02', '2020-04-03', '2020-04-04', '2020-04-05', '2020-04-06', '2020-04-07', '2020-04-08', '2020-04-09', '2020-04-10', '2020-04-11', '2020-04-12', '2020-04-13', '2020-04-14', '2020-04-15', '2020-04-16', '2020-04-17', '2020-04-18', '2020-04-19', '2020-04-20', '2020-4-21', '2020-4-22', '2020-4-23', '2020-4-24', '2020-4-25', '2020-4-26', '2020-4-27', '2020-4-28', '2020-4-29', '2020-4-30', '2020-5-1'],
-            axisLabel: {
-                show: true,
-                textStyle: {
-                    fontSize: 15      //更改坐标轴文字大小
-                }
-            }
-        },
-        yAxis: {
-            type: 'value',
-            axisLabel: {
-                formatter: '{value}'
-            },
-            axisLabel: {
-                show: true,
-                textStyle: {
-                    fontSize: 14      //更改坐标轴文字大小
-                }
-            }
-        },
-
-        series: [
-            {
-                name: 'Real confirmed cases',
-                type: 'line',
-                data: [260, 406, 526, 771, 1208, 1870, 2613, 4349, 5739, 7417, 9308, 11289, 13748, 16369, 19381, 22942, 26302, 28985, 31774, 33738, 35982, 37626, 38800, 51860, 55748, 56873, 57416, 57934, 58016, 57805, 56727, 55389, 53284, 51411, 49824, 47672, 45604, 43258, 39919, 37414, 35329, 32652, 30004, 27433, 25352, 23784, 22177, 20533, 19016, 17721, 16145, 14831, 13526, 12094, 10734, 9898, 8976, 8056, 7263, 6569, 6013, 5549, 5120, 4735, 4287, 3947, 3460, 3128, 2691, 2396, 2161, 2004, 1863, 1727, 1562, 1375, 1299, 1242, 1190, 1160, 1116, 1089, 1138, 1156, 1170, 1137, 1107, 1081, 1058, 1041, 1031, 1003, 1005, 959, 915, 838, 801, 723, 648, 647, 619, 599, 557, 531, 481, 395, 339, 295, 260, 208]
-            },
-            {
-                name: 'Predicted result',
-                type: 'line',
-                data: [224, 410, 550, 792, 1308, 1895, 3015, 4565, 6164, 7366, 8633, 10373, 12316, 14275, 16149, 17891, 19491, 20952, 22281, 23488, 24580, 25566, 26452, 27248, 27957, 28588, 29146, 29635, 30061, 30428, 30741, 31004, 31220, 31393, 31526, 31623, 31685, 31716, 31718, 31693, 31644, 31572, 31479, 31367, 31238, 31093, 30933, 30760, 30575, 30378, 30172, 29957, 29733, 29502, 29265, 29022, 28773, 28520, 28263, 28003, 27739, 27473, 27205, 26935, 26664, 26392, 26119, 25846, 25572, 25299, 25026, 24753, 24481, 24210, 23940, 23671, 23404, 23138, 22873, 22610, 22349, 22090, 21832, 21577, 21323, 21072, 20822, 20575, 20330, 20087, 19847, 19608, 19372, 19139, 18908, 18679, 18452, 18228, 18006, 17786, 17569, 17354, 17142, 16932, 16724, 16518, 16315, 16114, 15916, 15719, 15525, 15334, 15144, 14957, 14772, 14589, 14408, 14229, 14052, 13878, 13706, 13535, 13367, 13201, 13037, 12874, 12714, 12556, 12400, 12245, 12092, 11942, 11793, 11646, 11500, 11357, 11215, 11075, 10937, 10800, 10666, 10532, 10401, 10271, 10143, 10016, 9891, 9767, 9645, 9524, 9405, 9288, 9172, 9057, 8944, 8832, 8722, 8612, 8505, 8398, 8293, 8190, 8087, 7986, 7886, 7787, 7690, 7594, 7499, 7405, 7312, 7221, 7130, 7041, 6953, 6866, 6780, 6695, 6611, 6529, 6447, 6366, 6287, 6208, 6130, 6053, 5978, 5903, 5829, 5756, 5684, 5613, 5543, 5473, 5405, 5337, 5270, 5204, 5139, 5075, 5011, 4949, 4887, 4825, 4765, 4705, 4646, 4588, 4531, 4474, 4418, 4363, 4308, 4254, 4201, 4148, 4096, 4045, 3995, 3945, 3895, 3846, 3798, 3751, 3704, 3657, 3612, 3566, 3522, 3478, 3434, 3391, 3349, 3307, 3265, 3224, 3184, 3144, 3105, 3066, 3028, 2990, 2952, 2915, 2879
-                ]
-            },
-        ]
-
-    };
-    if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+        for (let j =0; j< size; j++) {
+            const input = document.createElement('input');
+            input.setAttribute('type', 'hidden');
+            input.setAttribute('name', paramsKey[j]);
+            input.setAttribute('value', paramsValue[j]);
+            form.appendChild(input);
+        }
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
     }
 
 </script>
@@ -553,234 +509,6 @@
 
     write2();
 </script>
-
-<script type="text/javascript">
-    $(function () {
-        var startDate = new Date('2020-01-20');
-        var endDate = new Date();
-        $('#date_start').datetimepicker({
-            format: 'yyyy-mm-dd',
-            weekStart: 1,
-            language: 'cn',
-            minView: 'month',
-            autoclose: true,
-            todayBtn: true,
-            startDate: startDate,
-            endDate: endDate,
-            language: "en",
-        }).on("changeDate", function (ev) {
-            if (ev.date) {
-                $('#date_end').datetimepicker('setStartDate', new Date(ev.date.valueOf()))
-            } else {
-                $('#date_end').datetimepicker('setStartDate');
-            }
-        });
-
-        $('#date_end').datetimepicker({
-            format: 'yyyy-mm-dd',
-            weekStart: 1,
-            language: 'cn',
-            minView: 'month',
-            autoclose: true,
-            startDate: startDate,
-            endDate: endDate,
-            language: "en",
-        }).on("changeDate", function (ev) {
-            if (ev.date) {
-                $('#date_start').datetimepicker('setEndDate', new Date(ev.date.valueOf()))
-            } else {
-                $('#date_start').datetimepicker('setEndDate', new Date());
-            }
-        });
-    });
-
-</script>
-<script>
-    var param = "";
-
-    function showreload() {
-
-        //xman:全部大写
-        param = ($("#model").val() + "_" + $("#data_start").val() + "_14.txt").toUpperCase();
-
-        getdata_model({
-            model_param: param,
-            model_path: "http://120.78.69.27:8080/model_data",
-            callback: function (data) {
-
-                data_raw = data.msg;
-
-                if (data1 != null) {
-                    changeDataToEchartdata(data_raw);
-                }
-            }
-        });
-
-        function changeDataToEchartdata(data1) {
-            //xman:数据转换成echarts使用的格式
-            var result_arr = data1.split('\n');
-            var len = result_arr.length;
-            var model_para_1 = "";
-            var model_para_2 = "";
-            var model_para_3 = "";
-            var date_str = "";
-            var confirm_str = "";
-            var result_str = "";
-            if (len == 9) {
-                model_para_1 = result_arr[0];
-                model_para_2 = result_arr[1];
-                model_para_3 = result_arr[2];
-                date_str = result_arr[4];
-                confirm_str = result_arr[6];
-                result_str = result_arr[8];
-            } else {
-                model_para_1 = result_arr[0];
-                model_para_2 = result_arr[1];
-                model_para_3 = null;
-                date_str = result_arr[3];
-                confirm_str = result_arr[5];
-                result_str = result_arr[7];
-            }
-            //xman:result_arr应该有三项
-
-
-            ShowModel(model_para_1,
-                model_para_2,
-                model_para_3,
-                goarrToGoresource(date_str),
-                goarrToGoresource(confrim_str),
-                goarrToGoresource(result_str));
-        }
-
-
-        //字符串转换成数组对象
-        function goarrToGoresource(data) {
-            data = data.replace("[", "");
-            data = data.replace("]", "")
-            var arr = data.split(',');
-            return arr;
-        }
-
-
-        function ShowModel(model_para_1, model_para_2, model_para_3,
-                           date_arr, confrim_arr, result_arr) {
-            /*
-                    //XMAN:标题后加上分类名称
-                    var categoryname = "";
-        //			var indexname = index.toString();
-            //		if(index == 1)
-                //	{
-                    //	indexname = "";
-                    //}
-                    var cpgname = $("#CpG"+indexname).val();
-                    if(cpgname.toUpperCase()!= "ALL")
-                    {
-                        categoryname += cpgname;
-                    }
-                    var densityname = $("#Density"+indexname).val();
-                    if(densityname != null && densityname.toUpperCase()!= "ALL")
-                    {
-                        categoryname += "/"+densityname;
-                    }
-                    var tataname = $("#TATA"+indexname).val();
-                    if(tataname.toUpperCase() != "ALL")
-                    {
-                        categoryname += "/"+tataname;
-                    }
-                    var breadthname = $("#breadth"+indexname).val();
-                    if(breadthname.toUpperCase() != "ALL")
-                    {
-                        categoryname += "/"+breadthname;
-                    }
-                    if(index == 1)
-                    {
-                        document.getElementById("chart_title"+index).innerHTML = "GO enrichment results of genes under category 1 ("+ categoryname +"):";
-                    }
-
-                    var resultdiv = document.getElementById("resultdiv"+index);
-                    resultdiv.style.display="";
-                    var resultdiv1_download = document.getElementById("resultdiv1_download");
-                    resultdiv1_download.style.display="";
-                    $(".nodata").remove();
-
-                    var dom = document.getElementById("res");
-                    var go_chart_1 = echarts.init(dom);*/
-
-            var dom = document.getElementById("res");
-            var myChart = echarts.init(dom);
-            var option = null;
-
-            option = {
-
-                title: {
-                    text: 'Epidemic transmission prediction',
-                    subtext: '2019nCoVAS'
-                },
-
-                legend: {
-                    top: 32,
-                    left: 'center',
-                    data: ['Real confirmed cases', 'Predicted result'],
-                    textStyle: { //图例文字的样式
-                        fontSize: 16
-                    },
-                },
-                tooltip: {
-                    trigger: 'item',
-                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    },
-
-                },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['2020-01-20', '2020-01-21', '2020-01-22', '2020-01-23', '2020-01-24', '2020-01-25', '2020-01-26', '2020-01-27', '2020-01-28', '2020-01-29', '2020-01-30', '2020-01-31', '2020-02-01', '2020-02-02', '2020-02-03', '2020-02-04', '2020-02-05', '2020-02-06', '2020-02-07', '2020-02-08', '2020-02-09', '2020-02-10', '2020-02-11', '2020-02-12', '2020-02-13', '2020-02-14', '2020-02-15', '2020-02-16', '2020-02-17', '2020-02-18', '2020-02-19', '2020-02-20', '2020-02-21', '2020-02-22', '2020-02-23', '2020-02-24', '2020-02-25', '2020-02-26', '2020-02-27', '2020-02-28', '2020-02-29', '2020-03-01', '2020-03-02', '2020-03-03', '2020-03-04', '2020-03-05', '2020-03-06', '2020-03-07', '2020-03-08', '2020-03-09', '2020-03-10', '2020-03-11', '2020-03-12', '2020-03-13', '2020-03-14', '2020-03-15', '2020-03-16', '2020-03-17', '2020-03-18', '2020-03-19', '2020-03-20', '2020-03-21', '2020-03-22', '2020-03-23', '2020-03-24', '2020-03-25', '2020-03-26', '2020-03-27', '2020-03-28', '2020-03-29', '2020-03-30', '2020-03-31', '2020-04-01', '2020-04-02', '2020-04-03', '2020-04-04', '2020-04-05', '2020-04-06', '2020-04-07', '2020-04-08', '2020-04-09', '2020-04-10', '2020-04-11', '2020-04-12', '2020-04-13', '2020-04-14', '2020-04-15', '2020-04-16', '2020-04-17', '2020-04-18', '2020-04-19', '2020-04-20', '2020-4-21', '2020-4-22', '2020-4-23', '2020-4-24', '2020-4-25', '2020-4-26', '2020-4-27', '2020-4-28', '2020-4-29', '2020-4-30', '2020-5-1'],
-                    axisLabel: {
-                        show: true,
-                        textStyle: {
-                            fontSize: 15      //更改坐标轴文字大小
-                        }
-                    }
-                },
-                yAxis: {
-                    type: 'value',
-                    axisLabel: {
-                        formatter: '{value}'
-                    },
-                    axisLabel: {
-                        show: true,
-                        textStyle: {
-                            fontSize: 14      //更改坐标轴文字大小
-                        }
-                    }
-                },
-
-                series: [
-                    {
-                        name: 'Real confirmed cases',
-                        type: 'line',
-                        data: [260, 406, 526, 771, 1208, 1870, 2613, 4349, 5739, 7417, 9308, 11289, 13748, 16369, 19381, 22942, 26302, 28985, 31774, 33738, 35982, 37626, 38800, 51860, 55748, 56873, 57416, 57934, 58016, 57805, 56727, 55389, 53284, 51411, 49824, 47672, 45604, 43258, 39919, 37414, 35329, 32652, 30004, 27433, 25352, 23784, 22177, 20533, 19016, 17721, 16145, 14831, 13526, 12094, 10734, 9898, 8976, 8056, 7263, 6569, 6013, 5549, 5120, 4735, 4287, 3947, 3460, 3128, 2691, 2396, 2161, 2004, 1863, 1727, 1562, 1375, 1299, 1242, 1190, 1160, 1116, 1089, 1138, 1156, 1170, 1137, 1107, 1081, 1058, 1041, 1031, 1003, 1005, 959, 915, 838, 801, 723, 648, 647, 619, 599, 557, 531, 481, 395, 339, 295, 260, 208]
-                    },
-                    {
-                        name: 'Predicted result',
-                        type: 'line',
-                        data: result_arr
-                    },
-                ]
-
-            };
-            // 为echarts对象加载数据
-            mycharts.setOption(option);
-            //hideLoading(go_chart_1);
-
-        }
-    }
-
-
-</script>
-
-<!--<script src="js/tail_2.js"></script>-->
 
 </body>
 

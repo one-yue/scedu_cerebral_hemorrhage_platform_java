@@ -4,6 +4,8 @@ import com.scu.scedu_cerebral_hemorrhage_platform_java.model.GeneTrajectory;
 import com.scu.scedu_cerebral_hemorrhage_platform_java.model.UtilRequest;
 import com.scu.scedu_cerebral_hemorrhage_platform_java.model.UtilResponse;
 import com.scu.scedu_cerebral_hemorrhage_platform_java.service.DataService;
+import com.scu.scedu_cerebral_hemorrhage_platform_java.tool.ListTool;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +13,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/cell_subtype_analysis")
@@ -51,6 +51,31 @@ public class FunctionController {
         return success(dataService.getTrailForAll(time, bundles));
     }
 
+    @GetMapping("/next_point")
+    public UtilResponse getNextPoint(@RequestParam String lastPoint,
+                                     @RequestParam String time,
+                                     @RequestParam String bundles) {
+
+        if (StringUtils.isBlank(lastPoint)) {
+            return success(new ArrayList<>());
+        }
+        List<List<String>> trails = dataService.getTrailForAll(time, bundles);
+        Set<String> nextPoints = new HashSet<>();
+
+        for (List<String> trail : trails) {
+            for (int i = 0; i < trail.size() - 1; i++) {
+                if ("head".equals(lastPoint)) {
+                    nextPoints.add(trail.get(i));
+                } else if (trail.get(i).equals(lastPoint)) {
+                    nextPoints.add(trail.get(i + 1));
+                }
+            }
+        }
+
+
+        return success(nextPoints);
+    }
+
     /**
      * 获取前三十的正/负基因
      *
@@ -60,22 +85,31 @@ public class FunctionController {
     @PostMapping("/data")
     public UtilResponse getData(@RequestBody UtilRequest request) {
         Map<String, List<GeneTrajectory>> result = new HashMap<>();
-        result.put("up", dataService.getTop30(request.getTrail(), request.getTime(), request.getBundles(), 1));
-        result.put("down", dataService.getTop30(request.getTrail(), request.getTime(), request.getBundles(), 0));
+        List<String> trail = ListTool.removeBlank(request.getTrail());
+        result.put("up", dataService.getTop30(trail, request.getTime(), request.getBundles(), 1));
+        result.put("down", dataService.getTop30(trail, request.getTime(), request.getBundles(), 0));
         return success(result);
     }
+
 
     /**
      * 生成文件
      *
-     * @param request time bundles 轨迹
+     * @param time
+     * @param bundles
+     * @param trail
+     * @param response
      */
-    @PostMapping("/file")
-    public void getFile(@RequestBody UtilRequest request,HttpServletResponse response) {
+    @GetMapping("/file")
+    public void getFile(@RequestParam("time") String time,
+                        @RequestParam("bundles") String bundles,
+                        @RequestParam("point") String[] trail, HttpServletResponse response) {
+        UtilRequest request = new UtilRequest(time, bundles, trail);
+
         StringBuilder text = new StringBuilder();
         //表头
         StringBuilder fileName = new StringBuilder(request.getTrail().get(0));
-        for(int i = 1; i<request.getTrail().size();i++){
+        for (int i = 1; i < request.getTrail().size(); i++) {
             fileName.append("->").append(request.getTrail().get(i));
         }
 
@@ -89,7 +123,7 @@ public class FunctionController {
         text.append("\n");
 
         List<GeneTrajectory> data = dataService.getTop30(request.getTrail(), request.getTime(), request.getBundles(), 1);
-        for(GeneTrajectory geneTrajectory: data){
+        for (GeneTrajectory geneTrajectory : data) {
             text.append(fileName);
             text.append("\t");
             text.append(geneTrajectory.getGene());
@@ -100,8 +134,16 @@ public class FunctionController {
             text.append("\n");
         }
 
-        exportTxt(response,text.toString(),fileName.toString());
+        exportTxt(response, text.toString(), fileName.toString());
 
+    }
+
+    @GetMapping("/testFile")
+    public void testFile(HttpServletResponse response) {
+        StringBuilder text = new StringBuilder();
+        text.append("hello world");
+
+        exportTxt(response, text.toString(), "data");
     }
 
     /* 导出txt文件
