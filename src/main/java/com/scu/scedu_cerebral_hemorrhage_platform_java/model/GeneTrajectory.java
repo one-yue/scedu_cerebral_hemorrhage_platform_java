@@ -1,5 +1,6 @@
 package com.scu.scedu_cerebral_hemorrhage_platform_java.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
@@ -9,6 +10,7 @@ public class GeneTrajectory {
     String id;
     String gene;
     Double score;
+    @JsonProperty("pValue")
     Double pValue;
     //"IVH_1d","IVH_3d","IVH_7d","IVH_Sham"
     String time;

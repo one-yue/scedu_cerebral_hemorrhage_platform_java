@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
 
-    <title>2019nCoVAS</title>
-    <meta name="keywords" content="2019-NcoV,transmission,genome,psychological stress,LAUP,k-mer,bioinformatics">
+    <title>Analysis-Platform</title>
+    <meta name="keywords" content="Cell subtype analysis platform">
     <meta name="description"
-          content="Web service for 2019-NcoV transmission, genome, and psychological stress analysis">
+          content="Web service for Cell subtype analysis">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -215,7 +215,7 @@
                                    style="background-color:#87CEFA">
                         </p>
 
-                        <p id="echartsData">这里是echarts</p>
+                        <div id="container" style="height: 400%; width:100%"></div>
 
 
                         <br>
@@ -232,6 +232,7 @@
         <div style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
             <div style="margin:10px 30px">
                 <div class="ibox float-e-margins">
+                    <p>download gene Top30 data</p>
                     <input type="button" id="postBtn2" value="download data"
                            onclick="inputDownloadEvt('get', '/cell_subtype_analysis/file')"/>
                 </div>
@@ -334,11 +335,9 @@
                 trail: trailPoint
             }),
             success: function (data, status, xhr) {
-                document.getElementById("echartsData").innerHTML = JSON.stringify(data);
+                // document.getElementById("echartsData").innerHTML = JSON.stringify(data);
                 console.log(data); // ajax方式请求的数据只能存放在javascipt内存空间，可以通过javascript访问，但是无法保存到硬盘
-                console.log(status);
-                console.log(xhr);
-                console.log("=====================");
+                refreshEcharts(data)
             },
             error: function () {
                 alert('Bad request! Please try again later.');
@@ -482,7 +481,7 @@
         form.setAttribute('method', method);
         form.setAttribute('action', url);
 
-        for (let j =0; j< size; j++) {
+        for (let j = 0; j < size; j++) {
             const input = document.createElement('input');
             input.setAttribute('type', 'hidden');
             input.setAttribute('name', paramsKey[j]);
@@ -493,6 +492,249 @@
         form.submit();
         document.body.removeChild(form);
     }
+
+    //===========echarts=================
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+
+    var Responses_data = {}
+    // var Responses_data = {
+    //     "isSuccess": true,
+    //     "msg": "成功",
+    //     "body": {
+    //         "up": [
+    //             {
+    //                 "pValue": 0.0001,
+    //                 "end": "1",
+    //                 "gene": "Clu",
+    //                 "score": 0.02,
+    //                 "start": "3"
+    //             },
+    //             {
+    //                 "pValue": 0.002,
+    //                 "end": "3",
+    //                 "gene": "Clu",
+    //                 "score": 0.05,
+    //                 "start": "VL"
+    //             },
+    //         ],
+    //         "down": [
+    //             {
+    //                 "pValue": 0.0001,
+    //                 "end": "b",
+    //                 "gene": "Clu",
+    //                 "score": -0.02,
+    //                 "start": "VL"
+    //             },
+    //             {
+    //                 "pValue": 0.002,
+    //                 "end": "3",
+    //                 "gene": "Clu",
+    //                 "score": -0.01,
+    //                 "start": "CL"
+    //             }
+    //         ]
+    //     }
+    // };
+
+    //xm：将服务器返回数据转换成散点图数据
+    function createPointsData(response_data) {
+        var pointsData = {};
+        if (response_data.isSuccess) {
+            var upData = response_data.body.up;
+            //xm：遍历所有UP基因
+            for (var i = 0; i < upData.length; i++) {
+                var geneTrack = upData[i].start + "->" + upData[i].end;
+                var one_point = [i, upData[i].score, upData[i].gene, upData[i].pValue];
+
+                if (!pointsData[geneTrack]) {
+                    pointsData[geneTrack] = [];
+                }
+
+                pointsData[geneTrack].push(one_point);
+
+            }
+
+            var downData = response_data.body.down;
+            //xm：遍历所有DOWN基因
+            for (var i = 0; i < downData.length; i++) {
+                var geneTrack = downData[i].start + "->" + downData[i].end;
+                var one_point = [i, downData[i].score, downData[i].gene, downData[i].pValue];
+
+                if (!pointsData[geneTrack]) {
+                    pointsData[geneTrack] = [];
+                }
+
+                pointsData[geneTrack].push(one_point);
+
+            }
+        }
+
+        return pointsData;
+    }
+
+    var sandianData = createPointsData(Responses_data);
+
+    var series_data = Object.keys(sandianData);
+
+    function create_series(data) {
+        var series = [];
+        for (var i = 0; i < data.length; i++) {
+            var one_serie = {};
+            one_serie.name = data[i];
+            one_serie.symbolSize = 10;
+            one_serie.data = this.sandianData[data[i]];
+            one_serie.type = "scatter";
+
+            series.push(one_serie);
+        }
+
+        return series;
+    }
+
+    var option;
+
+    option = {
+        xAxis: {
+            type: "value",
+            name: "", // x轴的名字，可以理解成单位
+            nameTextStyle: {
+                // x轴的名字的样式相关
+                color: "#BFBFBF",
+                nameLocation: "start",
+            },
+            splitLine: {
+                //去除网格线
+                show: false,
+            },
+            splitArea: {show: false}, //去除网格区域，否则会有一片区域
+            axisLabel: {
+                // 设置x轴的文字的样式
+                textStyle: {
+                    show: false,
+                    color: "#BDBDBD",
+                    fontSize: "1",
+                },
+            },
+            axisLine: {
+                show: true, // 把x轴从实线变成虚线
+                lineStyle: {
+                    // 设置x轴线条样式的颜色
+                    color: "#BDBDBD",
+                    width: 1,
+                    type: "solid",
+                },
+            },
+            scale: true, // 设置数据自动缩放，要不然数据多的话就堆一块了
+        },
+        yAxis: {
+            type: "value",
+            // name: "y轴的单位（人数）",
+            nameTextStyle: {
+                color: "#BFBFBF",
+                nameLocation: "end",
+            },
+            axisTick: {
+                show: false, // 去掉y轴的凸出刻度
+            },
+            axisLine: {
+                show: false, // 把y轴从实线变成虚线
+            },
+            splitLine: {
+                //去除网格线
+                show: true,
+                lineStyle: {
+                    type: "dashed", //设置网格线类型 dotted：虚线   solid:实线
+                },
+            },
+            splitArea: {show: false}, //去除网格区域
+            axisLabel: {
+                // 设置y轴的文字的样式
+                textStyle: {
+                    show: true,
+                    color: "#BDBDBD",
+                    fontSize: "12",
+                },
+            },
+            scale: true, // 设置数据自动缩放，要不然数据就堆一块了
+            // show: false,
+        },
+        grid: {
+            // 位置
+            show: true,
+            x: 36,
+            y: 40,
+            x2: 72,
+            y2: 36,
+            borderWidth: 0, // 去除图表的边框
+        },
+        tooltip: {
+            formatter: function (obj) {
+                let value = obj.value;
+                return (
+                    '<div style="border-bottom: 1px solid #baf; font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">' +
+                    obj.seriesName +
+                    "</div>" +
+                    "gene" +
+                    "：" +
+                    value[2] +
+                    "<br>" +
+                    "p-value" +
+                    "：" +
+                    Number(value[3]).toFixed(2) +
+                    "<br>" +
+                    "score" +
+                    "：" +
+                    Number(value[1]).toFixed(2) +
+                    "<br>"
+                );
+            },
+        },
+        series: create_series(series_data),
+        title: {
+            subtext: "Score",
+            left: 0, // 距离左边位置
+            top: -8, // 距离上面位置
+            subtextStyle: {
+                // 设置二级标题的样式
+                color: "#BFBFBF",
+            },
+        },
+        color: ["#4CD3D4", "#60BD65", "#46A7EA", "#E99E44", "#DC403F"], // 控制圆环图的颜色
+        legend: {
+            right: 400,
+            itemGap: 20,
+            itemWidth: 8,
+            itemHeight: 8,
+            data: series_data,
+            textStyle: {
+                fontSize: 20,
+            }
+        }
+    };
+
+    console.log(option, "变更前option")
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option, true);
+    }
+
+    function refreshEcharts(data) {
+        sandianData = createPointsData(data);
+        console.log("sandianData", sandianData)
+        const seriesDataTmp = Object.keys(sandianData);
+        console.log("seriesDataTmp", seriesDataTmp)
+        console.log(option, "变更前option")
+        option.series = create_series(seriesDataTmp)
+        option.legend.data = seriesDataTmp
+        console.log(option, "变更后option")
+        myChart.setOption(option, true)
+    }
+
+    window.addEventListener('resize', myChart.resize);
 
 </script>
 
