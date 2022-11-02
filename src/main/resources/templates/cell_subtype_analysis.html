@@ -163,6 +163,10 @@
                                 <button type="button" onclick="show()" style="background-color:#FFC0CB"> Submit</button>
                                 <input type="reset" value="Reset" onclick="resetGraph()"
                                        style="background-color:#87CEFA">
+                                <input type="reset" value="test1" onclick="showDiv('div1')"
+                                       style="background-color:#87CEFA">
+                                <input type="reset" value="test2" onclick="hideDiv('div1')"
+                                       style="background-color:#87CEFA">
                             </p>
                             <br><br>
                             <img id="heading" src="http://162.14.117.72/images/blank.jpg" width="782" height="538"/>
@@ -174,7 +178,7 @@
         </div>
 
 
-        <div style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+        <div id="div1" style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
             <div style="margin: 10px 5px 15px">
                 <form>
                     <!--<label for="formGroupInputLarge">Data segment selection:</label>-->
@@ -229,12 +233,14 @@
         </div>
         <!--<div id="res" style="height:300%;margin:0 auto;width:100%"></div>-->
 
-        <div style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+        <div id="div2" style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
             <div style="margin:10px 30px">
                 <div class="ibox float-e-margins">
-                    <p>download gene Top30 data</p>
-                    <input type="button" id="postBtn2" value="download data"
-                           onclick="inputDownloadEvt('get', '/cell_subtype_analysis/file')"/>
+                    <form>
+                        <p>download gene Top30 data</p>
+                        <input type="button" id="postBtn2" value="download data"
+                               onclick="inputDownloadEvt('get', '/cell_subtype_analysis/file')"/>
+                    </form>
                 </div>
             </div>
         </div>
@@ -247,6 +253,7 @@
     var trailPoint = ["", "", "", "", "", ""]
 
     function show() {
+        showDiv('div1')
         var objtime = document.getElementsByName("time");
         var objtrajectory = document.getElementsByName("trajectory");
         for (var i = 0, len1 = objtime.length; i < len1; i++) {
@@ -263,10 +270,22 @@
     }
 
     function resetGraph() {
+        hideDiv('div1')
+        hideDiv('div2')
         //重置数据
         time = undefined
         trajectory = undefined
         document.getElementById("heading").src = "http://162.14.117.72/images/blank.jpg";
+    }
+
+    function showDiv(divId) {
+        var d = document.getElementById(divId);
+        d.style.display = "block"
+    }
+
+    function hideDiv(divId) {
+        var d = document.getElementById(divId);
+        d.style.display = "none"
     }
 
     function setFun(elementId, nowPoint, lastPoint) {
@@ -316,6 +335,7 @@
     }
 
     function getTop30Data() {
+        showDiv('div2')
         if (time === "" || trajectory === "") {
             alert("Please select time and Trajectory bundles")
             return
@@ -421,6 +441,7 @@
 
 
     function resetTrailData() {
+        hideDiv('div2')
         for (var i = 0; i < trailPoint.length; i++) {
             trailPoint[i] = ""
         }
@@ -501,44 +522,6 @@
     });
 
     var Responses_data = {}
-    // var Responses_data = {
-    //     "isSuccess": true,
-    //     "msg": "成功",
-    //     "body": {
-    //         "up": [
-    //             {
-    //                 "pValue": 0.0001,
-    //                 "end": "1",
-    //                 "gene": "Clu",
-    //                 "score": 0.02,
-    //                 "start": "3"
-    //             },
-    //             {
-    //                 "pValue": 0.002,
-    //                 "end": "3",
-    //                 "gene": "Clu",
-    //                 "score": 0.05,
-    //                 "start": "VL"
-    //             },
-    //         ],
-    //         "down": [
-    //             {
-    //                 "pValue": 0.0001,
-    //                 "end": "b",
-    //                 "gene": "Clu",
-    //                 "score": -0.02,
-    //                 "start": "VL"
-    //             },
-    //             {
-    //                 "pValue": 0.002,
-    //                 "end": "3",
-    //                 "gene": "Clu",
-    //                 "score": -0.01,
-    //                 "start": "CL"
-    //             }
-    //         ]
-    //     }
-    // };
 
     //xm：将服务器返回数据转换成散点图数据
     function createPointsData(response_data) {
@@ -735,6 +718,10 @@
     }
 
     window.addEventListener('resize', myChart.resize);
+
+    //隐藏d1和d2
+    hideDiv('div1')
+    hideDiv('div2')
 
 </script>
 
