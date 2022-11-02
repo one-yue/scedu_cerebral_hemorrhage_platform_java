@@ -113,13 +113,72 @@ public class DataService {
             }
 
         }
-        //2 排序，输出top30
-        if(type == 1){
-            return ascending(queryList);
-        }else {
-            return descending(queryList);
+        return queryList;
+    }
+
+    //筛选出每两点之间的top30
+    public List<GeneTrajectory> get2PointData(String start, String end, String time, String bundles) {
+        //筛选出所有符合条件的数据
+        List<GeneTrajectory> queryList = new ArrayList<>();
+        for (GeneTrajectory geneTrajectory : geneData) {
+            if (geneTrajectory.getTime().equals(time) &&
+                    geneTrajectory.getBundles().equals(bundles) &&
+                    geneTrajectory.getStart().equals(start) &&
+                    geneTrajectory.getEnd().equals(end)) {
+                //检查当前列表里是否已经有该基因的数据了
+                Integer index = getDataByGeneName(geneTrajectory.getGene(), queryList);
+                if (index != null) {
+                    //出现重复的
+                    Double oldScore = queryList.get(index).getScore() * queryList.get(index).getScore();
+                    Double newScore = geneTrajectory.getScore() * geneTrajectory.getScore();
+                    //如果新的更大则替换
+                    queryList.add(index, geneTrajectory);
+                }
+                queryList.add(geneTrajectory);
+            }
         }
 
+        //2 排序，输出top30
+        return ascending(queryList);
+    }
+
+    public List<List<String>> getTableData(List<String> trail, String time, String bundles) {
+        List<GeneTrajectory> up = new ArrayList<>();
+        List<GeneTrajectory> down = new ArrayList<>();
+        for (int i = 0; i < trail.size() - 1; i++) {
+            //遍历每两点轨迹
+            List<GeneTrajectory> upAndDownData = get2PointData(trail.get(i), trail.get(i + 1), time, bundles);
+            up.addAll(upAndDownData.subList(0, 30));
+            down.addAll(upAndDownData.subList(31, 60));
+        }
+
+        //生成制表数据
+        List<List<String>> result = new ArrayList<>();
+        for (GeneTrajectory upGene : up) {
+            result.add(Arrays.asList(
+                    upGene.getStart() + "->" + upGene.getEnd(),
+                    upGene.getGene() + "(+)",
+                    upGene.getScore() + "",
+                    upGene.getPValue() + ""));
+        }
+        for (GeneTrajectory downGene : down) {
+            result.add(Arrays.asList(
+                    downGene.getStart() + "->" + downGene.getEnd(),
+                    downGene.getGene() + "(-)",
+                    downGene.getScore() + "",
+                    downGene.getPValue() + ""));
+        }
+
+        return result;
+    }
+
+    private Integer getDataByGeneName(String name, List<GeneTrajectory> currentList) {
+        for (int i = 0; i < currentList.size(); i++) {
+            if (name.equals(currentList.get(i).getGene())) {
+                return i;
+            }
+        }
+        return null;
     }
 
     //升序
@@ -139,7 +198,10 @@ public class DataService {
             in.set(j + 1, xData);
         }
 
-        return in.subList(0, 30);
+        List<GeneTrajectory> result = in.subList(0, 30);
+        result.addAll(in.subList(in.size() - 30, in.size()));
+
+        return result;
     }
 
     //降序

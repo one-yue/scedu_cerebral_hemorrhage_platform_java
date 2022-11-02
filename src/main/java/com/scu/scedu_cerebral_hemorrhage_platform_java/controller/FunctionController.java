@@ -91,6 +91,17 @@ public class FunctionController {
         return success(result);
     }
 
+    /**
+     * 获取制表数据
+     * @param request time bundles 轨迹
+     * @return 制表数据
+     */
+    @PostMapping("/tableData")
+    public List<List<String>> generateTableData(@RequestBody UtilRequest request) {
+        List<String> trail = ListTool.removeBlank(request.getTrail());
+        return dataService.getTableData(trail, request.getTime(), request.getBundles());
+    }
+
 
     /**
      * 生成文件
@@ -122,28 +133,20 @@ public class FunctionController {
         text.append("p-value");
         text.append("\n");
 
-        List<GeneTrajectory> data = dataService.getTop30(request.getTrail(), request.getTime(), request.getBundles(), 1);
-        for (GeneTrajectory geneTrajectory : data) {
-            text.append(fileName);
+        List<List<String>> data = dataService.getTableData(ListTool.removeBlank(request.getTrail()), request.getTime(), request.getBundles());
+        for (List<String> geneTrajectory : data) {
+            text.append(geneTrajectory.get(0));
             text.append("\t");
-            text.append(geneTrajectory.getGene());
+            text.append(geneTrajectory.get(1));
             text.append("\t");
-            text.append(geneTrajectory.getScore());
+            text.append(geneTrajectory.get(2));
             text.append("\t");
-            text.append(geneTrajectory.getPValue());
+            text.append(geneTrajectory.get(3));
             text.append("\n");
         }
 
         exportTxt(response, text.toString(), fileName.toString());
 
-    }
-
-    @GetMapping("/testFile")
-    public void testFile(HttpServletResponse response) {
-        StringBuilder text = new StringBuilder();
-        text.append("hello world");
-
-        exportTxt(response, text.toString(), "data");
     }
 
     /* 导出txt文件

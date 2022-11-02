@@ -149,6 +149,7 @@
 
                             <br><br><br><br>
                             <p>Trajectory bundles (Please select at least one Trajectory bundle):
+                                <br><br>
                                 <input type="radio" name="trajectory" value="All">All
                                 <br><br>
                                 <input type="radio" name="trajectory" value="Trajectory_bundle_1">Trajectory bundle I
@@ -178,7 +179,8 @@
         </div>
 
 
-        <div id="div1" style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+        <div id="div1"
+             style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
             <div style="margin: 10px 5px 15px">
                 <form>
                     <!--<label for="formGroupInputLarge">Data segment selection:</label>-->
@@ -233,11 +235,15 @@
         </div>
         <!--<div id="res" style="height:300%;margin:0 auto;width:100%"></div>-->
 
-        <div id="div2" style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+        <div id="div2"
+             style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
             <div style="margin:10px 30px">
                 <div class="ibox float-e-margins">
                     <form>
-                        <p>download gene Top30 data</p>
+                        <table id="tableData" border="1" bgcolor="black">
+
+                        </table>
+                        <!--                        <p>download gene Top30 data</p>-->
                         <input type="button" id="postBtn2" value="download data"
                                onclick="inputDownloadEvt('get', '/cell_subtype_analysis/file')"/>
                     </form>
@@ -335,7 +341,6 @@
     }
 
     function getTop30Data() {
-        showDiv('div2')
         if (time === "" || trajectory === "") {
             alert("Please select time and Trajectory bundles")
             return
@@ -363,6 +368,9 @@
                 alert('Bad request! Please try again later.');
             }
         })
+        showDiv('div2')
+        generateTable()
+
     }
 
     function getSelectValue() {
@@ -512,6 +520,69 @@
         document.body.appendChild(form);
         form.submit();
         document.body.removeChild(form);
+    }
+
+    /**
+     * 生成表格
+     */
+    function generateTable() {
+        $.ajax({
+            async: false,
+            type: "post",
+            url: '/cell_subtype_analysis/tableData',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                time: time,
+                bundles: trajectory,
+                trail: trailPoint
+            }),
+            success: function (data) {
+                var table = document.getElementById("tableData");
+                var tBody = document.createElement("tBody");
+                //设置标题:
+                var tr = document.createElement("tr");
+                tBody.appendChild(tr);
+
+                var td1 = document.createElement("td");
+                tr.appendChild(td1);
+                var trailName = trailPoint[0];
+                for (var n = 1; n < trailPoint.length; n++) {
+                    if (trailPoint[n] === "") {
+                        break;
+                    }
+                    trailName = trailName + "->" + trailPoint[n]
+                }
+                td1.innerHTML = trailName;
+
+                var td2 = document.createElement("td");
+                tr.appendChild(td2);
+                td2.innerHTML = "gene";
+
+                var td3 = document.createElement("td");
+                tr.appendChild(td3);
+                td3.innerHTML = "score";
+
+                var td4 = document.createElement("td");
+                tr.appendChild(td4);
+                td4.innerHTML = "p-value";
+
+                //插入数据
+                for (var i = 0; i < data.length; i++) {
+                    var trLine = document.createElement("tr");
+                    tBody.appendChild(trLine);
+                    for (var j = 0; j < 4; j++) {
+                        var tdCell = document.createElement("td");
+                        trLine.appendChild(tdCell);
+                        tdCell.innerHTML = data[i][j];
+                    }
+                }
+                table.appendChild(tBody);
+            },
+            error: function () {
+                table.appendChild(tBody);
+                alert('Bad request! Please try again later.');
+            }
+        })
     }
 
     //===========echarts=================
