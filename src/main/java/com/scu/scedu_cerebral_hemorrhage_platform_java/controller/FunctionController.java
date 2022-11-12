@@ -94,18 +94,42 @@ public class FunctionController {
 
     @PostMapping("/simData")
     public UtilResponse simData(@RequestBody List<UtilRequest> request) {
-        //todo 拿出第一个轨迹，time，脑区
-        //todo 拿出基因
+        if (request.size() != 2) {
+            return fail("数据传输错误", null);
+        }
 
-        //todo 拿出第二个轨迹。。。
-        //todo 拿出基因
+        UtilRequest request1 = request.get(0);
+        List<String> trail1 = ListTool.removeBlank(request1.getTrail());
+        List<GeneTrajectory> data1 = new ArrayList<>();
+        //拿出第一个轨迹，time，脑区 拿出基因
+        data1.addAll(dataService.getTop30(trail1, request1.getTime(), request1.getBundles(), 1));
+        data1.addAll(dataService.getTop30(trail1, request1.getTime(), request1.getBundles(), 0));
 
-        //todo 对比
+        UtilRequest request2 = request.get(1);
+        List<String> trail2 = ListTool.removeBlank(request1.getTrail());
+        List<GeneTrajectory> data2 = new ArrayList<>();
+        //拿出第一个轨迹，time，脑区 拿出基因
+        data2.addAll(dataService.getTop30(trail2, request2.getTime(), request2.getBundles(), 1));
+        data2.addAll(dataService.getTop30(trail2, request2.getTime(), request2.getBundles(), 0));
 
-        return null;
+        //对比
+        int intersection = 0;
+        for (GeneTrajectory gene1 : data1) {
+            for (GeneTrajectory gene2 : data2) {
+                if (gene1.getGene().equals(gene2.getGene())) {
+                    if (Objects.equals(gene1.getType(), gene2.getType())) {
+                        intersection++;
+                    } else {
+                        intersection--;
+                    }
+                }
+            }
+        }
+
+        return success((intersection / (data1.size() + data2.size()) + 1) / 2);
     }
 
-    @PostMapping("/simData")
+    @PostMapping("/simDataq")
     public UtilResponse dbSelect(@RequestBody List<UtilRequest> request) {
         //todo 查库
 
@@ -115,9 +139,9 @@ public class FunctionController {
     }
 
 
-
     /**
      * 获取制表数据
+     *
      * @param request time bundles 轨迹
      * @return 制表数据
      */

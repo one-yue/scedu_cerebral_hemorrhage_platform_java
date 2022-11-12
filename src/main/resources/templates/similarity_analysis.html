@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>Analysis-Platform</title>
+    <meta name="keywords" content="Cell subtype analysis platform">
+    <meta name="description"
+          content="Web service for Cell subtype analysis">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+    <link rel="shortcut icon" href="/static/img/coronavirus_logo.png">
+    <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/dataTables.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/buttons.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/select.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/semantic.min.css">
+    <link rel="stylesheet" href="/static/css/my.css">
+
+    <script src="/static/js/semantic.min.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        function write1() {
+
+            htmlobj = $.ajax({url: "/static/head.html", async: false});
+            var head = htmlobj.responseText;
+            document.write(head);
+
+
+        }
+
+        write1();
+    </script>
+
+
+    <!---<script src="js/head_2.js"></script>-->
+
+
+    <style>
+        a.J_menuItem {
+            border-left: 2px solid rgba(34, 36, 38, .1);
+            /* border-right: 2px solid rgba(34,36,38,.1); */
+        }
+
+        a.dropdown-toggle {
+            border-left: 2px solid rgba(34, 36, 38, .1);
+            /* border-right: 2px solid rgba(34,36,38,.1); */
+        }
+
+        .navbar-header {
+            width: auto;
+        }
+
+        #page-wrapper .gray-bg {
+            margin-left: 10em;
+            margin-right: 10em;
+        }
+
+        .first_line {
+            float: left;
+            margin-right: 30px;
+        }
+
+        #image {
+            float: right;
+        }
+
+        #train_div {
+            float: left;
+        }
+
+        #div_select_param {
+            float: left;
+        }
+
+        #image2 {
+            float: right;
+        }
+
+        #train_div2 {
+            float: left;
+        }
+
+        #div_select_param2 {
+            float: left;
+        }
+
+
+    </style>
+
+</head>
+
+
+<body class="gray-bg">
+
+<div class="wrapper wrapper-content">
+    <div>
+        <ul class="breadcrumb" style="margin:0px 300px -10px 300px;font:bold 15px Georgia, serif">
+            <li><a href="home.html"><i class="icon home"></i>Home</a></li>
+            <i class="right chevron icon divider"></i>
+            <li class="active">Cell SubType Analysis</li>
+        </ul>
+    </div>
+
+    <div style="border-width:1px;margin: 5px 270px;padding:5px 15px;">
+        <div style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+            <div style="margin: 10px 5px 15px">
+                <form>
+                    <!--<label for="formGroupInputLarge">Data segment selection:</label>-->
+                    <div class="row form-inline row">
+                        <form>
+                            <div id="div_select_param">
+                                <p class="first_line">Time:
+                                    <label for="time1"></label>
+                                    <select id="time1">
+                                        <option value="IVH_1d">IVH_1d</option>
+                                        <option value="IVH_3d">IVH_3d</option>
+                                        <option value="IVH_7d">IVH_7d</option>
+                                        <option value="IVH_Sham">IVH_Sham</option>
+                                    </select>
+                                </p>
+
+                                <p class="first_line">Trajectory bundles:
+                                    <label for="trajectory1"></label>
+                                    <select id="trajectory1">
+                                        <option value="All">All</option>
+                                        <option value="Trajectory_bundle_1">Trajectory_bundle_1</option>
+                                        <option value="Trajectory_bundle_2">Trajectory_bundle_2</option>
+                                        <option value="Trajectory_bundle_3">Trajectory_bundle_3</option>
+                                    </select>
+                                </p>
+
+                                <p class="first_line">
+                                    <button type="button" onclick="show('1')" style="background-color:#FFC0CB"> Submit
+                                    </button>
+                                    <input type="reset" value="Reset" onclick="resetGraph('1')"
+                                           style="background-color:#87CEFA">
+                                </p>
+                                <br><br><br><br><br><br><br>
+                                <div id="train_div">
+                                    <p>Cell subtype analysis (Please select at least 2 brain regions from upon
+                                        trajectory bundle):
+                                    <form id="selectPoint">
+                                        <br><br>
+                                        <label for="select1_1"></label><select id="select1_1"
+                                                                               onchange="getSelectValue('1')">
+                                        <option value="">--point--</option>
+                                    </select> →
+                                        <label for="select2_1"></label><select id="select2_1"
+                                                                               onchange="getSelectValue('1')">
+                                        <option value="">--point--</option>
+                                    </select> →
+                                        <label for="select3_1"></label><select id="select3_1"
+                                                                               onchange="getSelectValue('1')">
+                                        <option value="">--point--</option>
+                                    </select> →
+                                        <label for="select4_1"></label><select id="select4_1"
+                                                                               onchange="getSelectValue('1')">
+                                        <option value="">--point--</option>
+                                    </select> →
+                                        <label for="select5_1"></label><select id="select5_1"
+                                                                               onchange="getSelectValue('1')">
+                                        <option value="">--point--</option>
+                                    </select> →
+                                        <label for="select6_1"></label><select id="select6_1"
+                                                                               onchange="getSelectValue('1')">
+                                        <option value="">--point--</option>
+                                    </select>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                            <div id="image">
+                                <img id="heading1" src="http://162.14.117.72/images/blank.jpg" width="391"
+                                     height="269"/>
+                            </div>
+                        </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+            <div style="margin: 10px 5px 15px">
+                <form>
+                    <!--<label for="formGroupInputLarge">Data segment selection:</label>-->
+                    <div class="row form-inline row">
+                        <form>
+                            <div id="div_select_param2">
+                                <p class="first_line">Time:
+                                    <label for="time2"></label>
+                                    <select id="time2">
+                                        <option value="IVH_1d">IVH_1d</option>
+                                        <option value="IVH_3d">IVH_3d</option>
+                                        <option value="IVH_7d">IVH_7d</option>
+                                        <option value="IVH_Sham">IVH_Sham</option>
+                                    </select>
+                                </p>
+
+                                <p class="first_line">Trajectory bundles:
+                                    <label for="trajectory2"></label>
+                                    <select id="trajectory2">
+                                        <option value="All">All</option>
+                                        <option value="Trajectory_bundle_1">Trajectory_bundle_1</option>
+                                        <option value="Trajectory_bundle_2">Trajectory_bundle_2</option>
+                                        <option value="Trajectory_bundle_3">Trajectory_bundle_3</option>
+                                    </select>
+                                </p>
+
+                                <p class="first_line">
+                                    <button type="button" onclick="show('2')" style="background-color:#FFC0CB"> Submit
+                                    </button>
+                                    <input type="reset" value="Reset" onclick="resetGraph('2')"
+                                           style="background-color:#87CEFA">
+                                </p>
+                                <br><br><br><br><br><br><br>
+                                <div id="train_div2">
+                                    <p>Cell subtype analysis (Please select at least 2 brain regions from upon
+                                        trajectory bundle):
+                                    <form id="selectPoint2">
+                                        <br><br>
+                                        <label for="select1_2"></label><select id="select1_2"
+                                                                               onchange="getSelectValue('2')">
+                                        <option value="">--point--</option>
+                                    </select> →
+                                        <label for="select2_2"></label><select id="select2_2"
+                                                                               onchange="getSelectValue('2')">
+                                        <option value="">--point--</option>
+                                    </select> →
+                                        <label for="select3_2"></label><select id="select3_2"
+                                                                               onchange="getSelectValue('2')">
+                                        <option value="">--point--</option>
+                                    </select> →
+                                        <label for="select4_2"></label><select id="select4_2"
+                                                                               onchange="getSelectValue('2')">
+                                        <option value="">--point--</option>
+                                    </select> →
+                                        <label for="select5_2"></label><select id="select5_2"
+                                                                               onchange="getSelectValue('2')">
+                                        <option value="">--point--</option>
+                                    </select> →
+                                        <label for="select6_2"></label><select id="select6_2"
+                                                                               onchange="getSelectValue('2')">
+                                        <option value="">--point--</option>
+                                    </select>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                            <div id="image2">
+                                <img id="heading2" src="http://162.14.117.72/images/blank.jpg" width="391"
+                                     height="269"/>
+                            </div>
+                        </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+            <p>Similarity analysis tow trail</p>
+            <button type="button" onclick="show()" style="background-color:#FFC0CB"> Submit
+            </button>
+        </div>
+
+    </div>
+</div>
+<script>
+    var time1 = ""
+    var trajectory1 = ""
+    var trailPoint1 = ["", "", "", "", "", ""]
+
+    var time2 = ""
+    var trajectory2 = ""
+    var trailPoint2 = ["", "", "", "", "", ""]
+
+    function show(num) {
+        var objTime = document.getElementById("time" + num);
+        var timeIndex = objTime.selectedIndex;
+        var time = objTime.options[timeIndex].value;
+
+
+        var objTrajectory = document.getElementById("trajectory" + num);
+        var trajectoryIndex = objTrajectory.selectedIndex;
+        var trajectory = objTrajectory.options[trajectoryIndex].value;
+
+
+        console.log(time)
+        console.log(trajectory)
+
+        if (num === '1') {
+            time1 = time
+            trajectory1 = trajectory
+        } else {
+            time2 = time
+            trajectory2 = trajectory
+        }
+
+        document.getElementById("heading" + num).src = "http://162.14.117.72/images/" + time + "_" + trajectory + ".jpg";
+    }
+
+    function resetGraph(num) {
+        //重置数据
+        if (num === '1') {
+            time1 = ""
+            trajectory1 = ""
+        } else {
+            time2 = ""
+            trajectory2 = ""
+        }
+        document.getElementById("heading" + num).src = "http://162.14.117.72/images/blank.jpg";
+    }
+
+    function showDiv(divId) {
+        var d = document.getElementById(divId);
+        d.style.display = "block"
+    }
+
+    function hideDiv(divId) {
+        var d = document.getElementById(divId);
+        d.style.display = "none"
+    }
+
+    function setFun(elementId, nowPoint, lastPoint, time, trajectory) {
+        var value = []
+        if (time === "" || trajectory === "") {
+            value = []
+        } else {
+            value = getNextData(lastPoint, time, trajectory)
+        }
+        console.log("value" + value)
+        //根据上一个节点，生成下拉列表
+        var select = document.getElementById(elementId);
+        select.length = 1;
+        select.options[0].selected = true;
+        for (var x = 0; x < value.length; x++) {
+            var option = document.createElement("option");
+            option.setAttribute("value", value[x]);
+            if (value[x] === nowPoint) {
+                option.setAttribute("selected", "selected");
+            }
+            option.appendChild(document.createTextNode(value[x]));
+            select.appendChild(option);
+        }
+    }
+
+    var result
+
+    function getNextData(lastPoint, time, trajectory) {
+        $.ajax({
+            async: false,
+            type: "get",  //或者GET
+            url: '/cell_subtype_analysis/next_point?time=' + time + '&bundles=' + trajectory + '&lastPoint=' + lastPoint,
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data); // ajax方式请求的数据只能存放在javascipt内存空间，可以通过javascript访问，但是无法保存到硬盘
+                result = data.body
+                console.log(result)
+            },
+            error: function () {
+                // alert('Bad request! Please try again later.');
+            }
+        })
+        return result
+    }
+
+
+    function getSelectValue(num) {
+        var myselect1 = document.getElementById("select1_" + num)
+        var index1 = myselect1.selectedIndex
+        var value1 = myselect1.options[index1].value
+
+        var myselect2 = document.getElementById("select2_" + num)
+        var index2 = myselect2.selectedIndex
+        var value2 = myselect2.options[index2].value
+
+        var myselect3 = document.getElementById("select3_" + num)
+        var index3 = myselect3.selectedIndex
+        var value3 = myselect3.options[index3].value
+
+        var myselect4 = document.getElementById("select4_" + num)
+        var index4 = myselect4.selectedIndex
+        var value4 = myselect4.options[index4].value
+
+        var myselect5 = document.getElementById("select5_" + num)
+        var index5 = myselect5.selectedIndex
+        var value5 = myselect5.options[index5].value
+
+        var myselect6 = document.getElementById("select6_" + num)
+        var index6 = myselect6.selectedIndex
+        var value6 = myselect6.options[index6].value
+
+        if (num === '1') {
+            trailPoint1 = [value1, value2, value3, value4, value5, value6]
+        } else {
+            trailPoint2 = [value1, value2, value3, value4, value5, value6]
+        }
+    }
+
+
+    function resetTrailData() {
+        hideDiv('div2')
+        for (var i = 0; i < trailPoint.length; i++) {
+            trailPoint[i] = ""
+        }
+
+        var myselect1 = document.getElementById("select1")
+        var index1 = myselect1.selectedIndex
+        myselect1.options[index1].value = ""
+
+        var myselect2 = document.getElementById("select2")
+        var index2 = myselect2.selectedIndex
+        myselect2.options[index2].value = ""
+
+        var myselect3 = document.getElementById("select3")
+        var index3 = myselect3.selectedIndex
+        myselect3.options[index3].value = ""
+
+        var myselect4 = document.getElementById("select4")
+        var index4 = myselect4.selectedIndex
+        myselect4.options[index4].value = ""
+
+        var myselect5 = document.getElementById("select5")
+        var index5 = myselect5.selectedIndex
+        myselect5.options[index5].value = ""
+
+        var myselect6 = document.getElementById("select6")
+        var index6 = myselect6.selectedIndex
+        myselect6.options[index6].value = ""
+
+    }
+
+    window.onclick = function () {
+        console.log("time1:", time1)
+        console.log("time2:", time2)
+        console.log("trajectory1:", trajectory1)
+        console.log("trajectory2:", trajectory2)
+        setFun("select1_1", trailPoint1[0], "head", time1, trajectory1)
+        setFun("select2_1", trailPoint1[1], trailPoint1[0], time1, trajectory1)
+        setFun("select3_1", trailPoint1[2], trailPoint1[1], time1, trajectory1)
+        setFun("select4_1", trailPoint1[3], trailPoint1[2], time1, trajectory1)
+        setFun("select5_1", trailPoint1[4], trailPoint1[3], time1, trajectory1)
+        setFun("select6_1", trailPoint1[5], trailPoint1[4], time1, trajectory1)
+
+        setFun("select1_2", trailPoint2[0], "head", time2, trajectory2)
+        setFun("select2_2", trailPoint2[1], trailPoint2[0], time2, trajectory2)
+        setFun("select3_2", trailPoint2[2], trailPoint2[1], time2, trajectory2)
+        setFun("select4_2", trailPoint2[3], trailPoint2[2], time2, trajectory2)
+        setFun("select5_2", trailPoint2[4], trailPoint2[3], time2, trajectory2)
+        setFun("select6_2", trailPoint2[5], trailPoint2[4], time2, trajectory2)
+    }
+
+</script>
+
+
+<script language="javascript" type="text/javascript">
+
+    function write2() {
+
+        htmlobj = $.ajax({url: "/static/tail.html", async: false});
+        var tail = htmlobj.responseText;
+
+        document.write(tail);
+    }
+
+    write2();
+</script>
+
+</body>
+
+</html>

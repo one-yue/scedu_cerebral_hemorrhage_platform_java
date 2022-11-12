@@ -17,4 +17,14 @@ public class PageController {
     public String analysisPage(){
         return "cell_subtype_analysis";
     }
+
+    @GetMapping("/cell_mesh")
+    public String meshPage(){
+        return "CellMeSH";
+    }
+
+    @GetMapping("/similarity_analysis")
+    public String similarityPage(){
+        return "similarity_analysis";
+    }
 }
