@@ -42,7 +42,6 @@ public class DataService {
             return result;
         }
         return getTrail(time, bundles);
-
     }
 
     //根据数据找到所有轨迹
