@@ -22,6 +22,7 @@ public class FunctionController {
     @Autowired
     DataService dataService;
 
+
     /**
      * 根据time和bundles返回对应的轨迹图片的地址
      *
@@ -90,6 +91,30 @@ public class FunctionController {
         result.put("down", dataService.getTop30(trail, request.getTime(), request.getBundles(), 0));
         return success(result);
     }
+
+    @PostMapping("/simData")
+    public UtilResponse simData(@RequestBody List<UtilRequest> request) {
+        //todo 拿出第一个轨迹，time，脑区
+        //todo 拿出基因
+
+        //todo 拿出第二个轨迹。。。
+        //todo 拿出基因
+
+        //todo 对比
+
+        return null;
+    }
+
+    @PostMapping("/simData")
+    public UtilResponse dbSelect(@RequestBody List<UtilRequest> request) {
+        //todo 查库
+
+        //todo 转换数据
+
+        return null;
+    }
+
+
 
     /**
      * 获取制表数据
