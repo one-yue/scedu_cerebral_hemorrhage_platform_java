@@ -126,7 +126,7 @@ public class FunctionController {
             }
         }
 
-        return success((intersection / (data1.size() + data2.size()) + 1) / 2);
+        return success(((double) intersection / (double) (data1.size() + data2.size()) + 1.0) / 2.0);
     }
 
     @PostMapping("/simDataq")

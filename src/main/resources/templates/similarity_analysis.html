@@ -132,6 +132,7 @@
                                         <option value="IVH_7d">IVH_7d</option>
                                         <option value="IVH_Sham">IVH_Sham</option>
                                     </select>
+                                    <img src="/static/img/question.png" title="Please select one experimental group after IVH" width="25" height="25">
                                 </p>
 
                                 <p class="first_line">Trajectory bundles:
@@ -142,6 +143,7 @@
                                         <option value="Trajectory_bundle_2">Trajectory_bundle_2</option>
                                         <option value="Trajectory_bundle_3">Trajectory_bundle_3</option>
                                     </select>
+                                    <img src="/static/img/question.png" title="Please select at least one Trajectory bundle" width="25" height="25">
                                 </p>
 
                                 <p class="first_line">
@@ -210,6 +212,7 @@
                                         <option value="IVH_7d">IVH_7d</option>
                                         <option value="IVH_Sham">IVH_Sham</option>
                                     </select>
+                                    <img src="/static/img/question.png" title="Please select one experimental group after IVH" width="25" height="25">
                                 </p>
 
                                 <p class="first_line">Trajectory bundles:
@@ -220,6 +223,7 @@
                                         <option value="Trajectory_bundle_2">Trajectory_bundle_2</option>
                                         <option value="Trajectory_bundle_3">Trajectory_bundle_3</option>
                                     </select>
+                                    <img src="/static/img/question.png" title="Please select at least one Trajectory bundle" width="25" height="25">
                                 </p>
 
                                 <p class="first_line">
@@ -274,9 +278,12 @@
         </div>
 
         <div style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
-            <p>Similarity analysis tow trail</p>
-            <button type="button" onclick="show()" style="background-color:#FFC0CB"> Submit
+            <p>Similarity analysis between above 2 cell subtypes
+                <img src="/static/img/question.png" title="The similarity analysis is to describe the similarity between cell subtypes on the different trajectory by inputting the marker gene sets." width="25" height="25">
+            </p>
+            <button type="button" onclick="similarity()" style="background-color:#FFC0CB"> Submit
             </button>
+            <input id="similarity_result" type="text" disabled="disabled"/>
         </div>
 
     </div>
@@ -378,6 +385,35 @@
             }
         })
         return result
+    }
+
+    function similarity() {
+        $.ajax({
+            async: false,
+            type: "post",  //或者GET
+            url: '/cell_subtype_analysis/simData',
+            contentType: 'application/json',
+            data: JSON.stringify([
+                {
+                    time: time1,
+                    bundles: trajectory1,
+                    trail: trailPoint1
+                },
+                {
+                    time: time2,
+                    bundles: trajectory2,
+                    trail: trailPoint2
+                }]),
+            success: function (data, status, xhr) {
+                // document.getElementById("echartsData").innerHTML = JSON.stringify(data);
+                console.log(data); // ajax方式请求的数据只能存放在javascipt内存空间，可以通过javascript访问，但是无法保存到硬盘
+                var result_input = document.getElementById("similarity_result")
+                result_input.value=data.body
+            },
+            error: function () {
+                alert('Bad request! Please try again later.');
+            }
+        })
     }
 
 
