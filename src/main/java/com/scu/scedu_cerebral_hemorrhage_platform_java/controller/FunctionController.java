@@ -1,6 +1,8 @@
 package com.scu.scedu_cerebral_hemorrhage_platform_java.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.scu.scedu_cerebral_hemorrhage_platform_java.model.GeneTrajectory;
+import com.scu.scedu_cerebral_hemorrhage_platform_java.model.TrailData;
 import com.scu.scedu_cerebral_hemorrhage_platform_java.model.UtilRequest;
 import com.scu.scedu_cerebral_hemorrhage_platform_java.model.UtilResponse;
 import com.scu.scedu_cerebral_hemorrhage_platform_java.service.DataService;
@@ -21,6 +23,9 @@ public class FunctionController {
 
     @Autowired
     DataService dataService;
+
+    @Autowired
+    JSONObject subtypeData;
 
 
     /**
@@ -129,16 +134,6 @@ public class FunctionController {
         return success(((double) intersection / (double) (data1.size() + data2.size()) + 1.0) / 2.0);
     }
 
-    @PostMapping("/simDataq")
-    public UtilResponse dbSelect(@RequestBody List<UtilRequest> request) {
-        //todo 查库
-
-        //todo 转换数据
-
-        return null;
-    }
-
-
     /**
      * 获取制表数据
      *
@@ -195,6 +190,22 @@ public class FunctionController {
         }
 
         exportTxt(response, text.toString(), fileName.toString());
+
+    }
+
+
+    @GetMapping("/subtypeData")
+    public Object getSubtypeData(@RequestParam("time") String time,
+                                         @RequestParam("subtype") String subtype) {
+
+        Object data = subtypeData.get(subtype + "_" + time);
+        if (data == null) {
+            String[] title = {"up-regulated-LRs", "down-regulated-LRs"};
+            List<String[]> result = new ArrayList<>();
+            result.add(title);
+            return result;
+        }
+        return data;
 
     }
 

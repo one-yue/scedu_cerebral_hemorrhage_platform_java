@@ -44,4 +44,18 @@ public class ProjectData {
 
         return null;
     }
+
+    @Bean
+    public JSONObject getSubtypeData() throws IOException {
+        Resource resource = new ClassPathResource("subtype_data.json");
+        InputStream is = resource.getInputStream();
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr);
+        String data = null;
+        if((data = br.readLine()) != null) {
+            return JSONObject.parseObject(data);
+        }
+
+        return null;
+    }
 }

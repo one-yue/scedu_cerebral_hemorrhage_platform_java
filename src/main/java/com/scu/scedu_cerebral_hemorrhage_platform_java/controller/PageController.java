@@ -9,22 +9,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController {
 
     @GetMapping("/home")
-    public String homePage(){
+    public String homePage() {
         return "home";
     }
 
     @GetMapping("/cell_subtype_analysis")
-    public String analysisPage(){
+    public String analysisPage() {
         return "cell_subtype_analysis";
     }
 
     @GetMapping("/cell_mesh")
-    public String meshPage(){
+    public String meshPage() {
         return "CellMeSH";
     }
 
     @GetMapping("/similarity_analysis")
-    public String similarityPage(){
+    public String similarityPage() {
         return "similarity_analysis";
+    }
+
+    @GetMapping("/cell_communication")
+    public String communicationPage() {
+        return "cell_communication";
     }
 }

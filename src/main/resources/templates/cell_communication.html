@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>Analysis-Platform</title>
+    <meta name="keywords" content="Cell subtype analysis platform">
+    <meta name="description"
+          content="Web service for Cell subtype analysis">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+    <link rel="shortcut icon" href="/static/img/coronavirus_logo.png">
+    <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/dataTables.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/buttons.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/select.semanticui.min.css">
+    <link rel="stylesheet" href="/static/css/semantic.min.css">
+    <link rel="stylesheet" href="/static/css/my.css">
+
+    <script src="/static/js/semantic.min.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        function write1() {
+
+            htmlobj = $.ajax({url: "/static/head.html", async: false});
+            var head = htmlobj.responseText;
+            document.write(head);
+
+
+        }
+
+        write1();
+    </script>
+
+
+    <!---<script src="js/head_2.js"></script>-->
+
+
+    <style>
+        a.J_menuItem {
+            border-left: 2px solid rgba(34, 36, 38, .1);
+            /* border-right: 2px solid rgba(34,36,38,.1); */
+        }
+
+        a.dropdown-toggle {
+            border-left: 2px solid rgba(34, 36, 38, .1);
+            /* border-right: 2px solid rgba(34,36,38,.1); */
+        }
+
+        .navbar-header {
+            width: auto;
+        }
+
+        #page-wrapper .gray-bg {
+            margin-left: 10em;
+            margin-right: 10em;
+        }
+
+        .first_line {
+            float: left;
+            margin-right: 30px;
+        }
+
+        #div_select_param {
+            float: left;
+        }
+
+
+    </style>
+
+</head>
+
+
+<body class="gray-bg">
+
+<div class="wrapper wrapper-content">
+    <div>
+        <ul class="breadcrumb" style="margin:0px 300px -10px 300px;font:bold 15px Georgia, serif">
+            <li><a href="home.html"><i class="icon home"></i>Home</a></li>
+            <i class="right chevron icon divider"></i>
+            <li class="active">Cell-Cell communication strength Density analysis</li>
+        </ul>
+    </div>
+
+    <div style="border-width:1px;margin: 5px 270px;padding:5px 15px;">
+        <div style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+            <div style="margin: 10px 5px 15px">
+                <form>
+                    <!--<label for="formGroupInputLarge">Data segment selection:</label>-->
+                    <div class="row form-inline row">
+                        <form>
+                            <div id="div_select_param">
+                                <p class="first_line">Cell subtype:
+                                    <label for="cellSubtype"></label>
+                                    <select id="cellSubtype">
+                                        <option value="subtype2">VL->fxs->CA1-DG</option>
+                                        <option value="subtype1">TH->CA1->DG</option>
+                                        <option value="subtype3">VL->I->(V_VIa_VIb)</option>
+                                    </select>
+                                    <img src="/static/img/question.png" title="Please select a specified cell subtype."
+                                         width="25" height="25">
+                                </p>
+
+                                <p class="first_line">Time:
+                                    <label for="time"></label>
+                                    <select id="time">
+                                        <option value="IVH_1d">IVH_1d</option>
+                                        <option value="IVH_3d">IVH_3d</option>
+                                        <option value="IVH_7d">IVH_7d</option>
+                                        <option value="IVH_Sham">IVH_Sham</option>
+                                    </select>
+                                    <img src="/static/img/question.png"
+                                         title="Please select one experimental group after IVH." width="25" height="25">
+                                </p>
+
+                                <p class="first_line">
+                                    <button type="button" onclick="show()" style="background-color:#FFC0CB"> Submit
+                                    </button>
+                                    <button type="button" onclick="resetPage()" style="background-color:#87CEFA"> Reset
+                                    </button>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="div1"
+             style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+            <p>Cell subtype’s Ligend_Receptor pairs:
+                <img src="/static/img/question.png"
+                     title="The Ligend-Receptor pairs corresponding to the marker gene set of cell subtype in CellTalkDB database."
+                     width="25" height="25">
+            </p>
+
+            <table id="tableData" border="1" bgcolor="black">
+
+            </table>
+        </div>
+
+        <div id="div2"
+             style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
+            <p>Cell subtype’s Cell-Cell communication strength Density:
+                <img src="/static/img/question.png"
+                     title="The average Cell-cell communication strength Density for all Ligand-Receptor pairs of the cell subtypes at the specified time ."
+                     width="25" height="25">
+            </p>
+            <input id="density_result" type="text" disabled="disabled"/>
+        </div>
+
+    </div>
+</div>
+<script>
+    var subtype = ""
+    var time = ""
+    var density = {
+        "subtype2_IVH_Sham": 1.020789071,
+        "subtype2_IVH_1d": 0,
+        "subtype2_IVH_3d": 1.062137634,
+        "subtype2_IVH_7d": 0.89214771,
+        "subtype1_IVH_Sham": 0,
+        "subtype1_IVH_1d": 1.002947839,
+        "subtype1_IVH_3d": 1.026034144,
+        "subtype1_IVH_7d": 1.000375005,
+        "subtype3_IVH_Sham": 1.010678365,
+        "subtype3_IVH_1d": 1.007653558,
+        "subtype3_IVH_3d": 0.577471648,
+        "subtype3_IVH_7d": 1.014159856,
+    }
+
+    function show() {
+        //获取值
+        var objTime = document.getElementById("time");
+        var timeIndex = objTime.selectedIndex;
+        time = objTime.options[timeIndex].value;
+
+        var objSubtype = document.getElementById("cellSubtype");
+        var subtypeIndex = objSubtype.selectedIndex;
+        subtype = objSubtype.options[subtypeIndex].value;
+
+        console.log('time', time)
+        console.log('cellSubtype', subtype)
+
+        //生成表格
+        generateTable()
+        //获取数据
+        var result_input = document.getElementById("density_result")
+        result_input.value = density[subtype + '_' + time]
+        //显示两个div
+        showDiv('div1')
+        showDiv('div2')
+    }
+
+    function resetPage() {
+        console.log("hello", time)
+        //清空值
+        subtype = ""
+        time = ""
+        //隐藏div
+        hideDiv('div1')
+        hideDiv('div2')
+    }
+
+    /**
+     * 生成表格
+     */
+    function generateTable() {
+        $.ajax({
+            async: false,
+            type: "get",
+            url: '/cell_subtype_analysis/subtypeData?time=' + time + '&subtype=' + subtype,
+            contentType: 'application/json',
+            success: function (data) {
+                var table = document.getElementById("tableData");
+                var tableBody = document.getElementById("tBody_id");
+                if (tableBody !== null) {
+                    tableBody.remove()
+                }
+                var tBody = document.createElement("tBody");
+                tBody.id = 'tBody_id'
+                //设置标题:
+                var tr = document.createElement("tr");
+                tBody.appendChild(tr);
+
+                //插入数据
+                for (var i = 0; i < data.length; i++) {
+                    var trLine = document.createElement("tr");
+                    tBody.appendChild(trLine);
+                    for (var j = 0; j < 2; j++) {
+                        var tdCell = document.createElement("td");
+                        trLine.appendChild(tdCell);
+                        tdCell.innerHTML = data[i][j];
+                    }
+                }
+                table.appendChild(tBody);
+            },
+            error: function () {
+                table.appendChild(tBody);
+                alert('Bad request! Please try again later.');
+            }
+        })
+    }
+
+    function showDiv(divId) {
+        var d = document.getElementById(divId);
+        d.style.display = "block"
+    }
+
+    function hideDiv(divId) {
+        var d = document.getElementById(divId);
+        d.style.display = "none"
+    }
+
+    hideDiv('div1')
+    hideDiv('div2')
+</script>
+
+
+<script language="javascript" type="text/javascript">
+
+    function write2() {
+
+        htmlobj = $.ajax({url: "/static/tail.html", async: false});
+        var tail = htmlobj.responseText;
+
+        document.write(tail);
+    }
+
+    write2();
+</script>
+
+</body>
+
+</html>
