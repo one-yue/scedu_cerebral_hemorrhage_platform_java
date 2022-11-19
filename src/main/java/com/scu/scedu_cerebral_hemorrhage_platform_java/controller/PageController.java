@@ -13,23 +13,23 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping("/cell_subtype_analysis")
+    @GetMapping("/cell_subtype_identification")
     public String analysisPage() {
-        return "cell_subtype_analysis";
+        return "cell_subtype_identification";
     }
 
-    @GetMapping("/cell_mesh")
+    @GetMapping("/similar_cell_type_search")
     public String meshPage() {
-        return "CellMeSH";
+        return "similar_cell_type_search";
     }
 
-    @GetMapping("/similarity_analysis")
+    @GetMapping("/cell_subtype_similarity_computing")
     public String similarityPage() {
-        return "similarity_analysis";
+        return "cell_subtype_similarity_computing";
     }
 
-    @GetMapping("/cell_communication")
+    @GetMapping("/cell_cell_communication_analysis")
     public String communicationPage() {
-        return "cell_communication";
+        return "cell_cell_communication_analysis";
     }
 }

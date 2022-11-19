@@ -10,12 +10,12 @@
     <title>Analysis-Platform</title>
     <meta name="keywords" content="2019-NcoV,transmission,genome,psychological stress,LAUP,k-mer,bioinformatics">
     <meta name="description"
-        content="Web service for 2019-NcoV transmission, genome, and psychological stress analysis">
+          content="Web service for 2019-NcoV transmission, genome, and psychological stress analysis">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
 
-    <link rel="shortcut icon" href="/static/img/coronavirus_logo.png">
+    <link rel="shortcut icon" href="/static/img/logo.png">
     <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
     <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="/static/css/animate.css" rel="stylesheet">
@@ -116,108 +116,93 @@
 
 <body class="gray-bg">
 
-    <div class="wrapper wrapper-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10" style="left:-8%">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title" style="width: 1340px; height: 160px;">
-                            <h2>Overview</h2>
-                            <p>There is Overview,detail: <a aria-expanded="false" role="button" href="/cell_subtype_analysis" > Cell subtype analysis</a></p>
-                        </div>
+<div class="wrapper wrapper-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10" style="left:-8%">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="width: 1340px; height: 160px;">
+                        <h2>Overview</h2>
+                        <p>Since Intraventricular haemorrhage (IVH) is one of the common complications after various acute brain injuries, leading to severe mortality and mobility, with great burdens on economics and society, we develop such a 3DAsIVH webservice that not only offers online cell subtype identification to identify a cell subtype, but also provides similarity algorithm for cell subtypes, search for similar cell types by CellMeSH, cell-cell communication and signalling pathway analysis to analysis the development of IVH.</p>
                     </div>
                 </div>
             </div>
-<!--            <div class="row">-->
-<!--                <div class="col-md-5" style="float:left;left:-8%">-->
-<!--                    <div class="ibox float-e-margins">-->
-<!--                        <div class="ibox-title" style="width: 650px;height: 330px;">-->
-<!--                            <h2>Epidemic transmission prediction</h2>-->
-<!--                            <p>To predict the epdemic transmission and basic reproduction number(R0) for 2019-nCoV, we-->
-<!--                                offer three epidemic transmission predictive models: SIR, SEIR and SEIRQ. Especially,-->
-<!--                                the SEIRQ model considers quarantined case factor, which can be used to predict epidemic-->
-<!--                                situation under the condition of suspected cases quarantine.  <a href="epidemic_prediction.html" target="_blank"><u>View details</u></a><br>-->
-<!--                                <a href="epidemic_prediction.html" target="_blank"><img src="/static/img/epi.png" style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>-->
-
-<!--                        </div>-->
-<!--                        <div>-->
-<!--                            -->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-5" style="float:right;right:8%">-->
-<!--                    <div class="ibox float-e-margins">-->
-<!--                        <div class="ibox-title" style="width: 655px;height: 330px;">-->
-<!--                            <h2>Genome sequence analysis</h2>-->
-<!--                            <p>In order to analyze the LAUPs sequence characteris-tics for 2019-nCoV genome, we use JBLA-->
-<!--                                (Jellyfish-based LAUPs analysis application) to compute the underrepresented sequence-->
-<!--                                and common LAUPs. We also introduced the MOTIF discovery method to find the most-->
-<!--                                frequent arrangement pattern in the common LAUPs and provide data download service to-->
-<!--                                help users for further sequence and phylogenetic analysis.  <a href="genomic_laups.html" target="_blank"><u>View details</u></a><br>-->
-<!--                                <a href="genomic_kmer.html" target="_blank"><img src="/static/img/kmer.png" style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>-->
-<!--                        </div>-->
-
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-5" style="float:left;left:-8%">-->
-<!--                    <div class="ibox float-e-margins">-->
-<!--                        <div class="ibox-title" style="width: 650px;height: 330px;">-->
-<!--                            <h2>Psychological stress assesment</h2>-->
-<!--                            <p>We developed two corresponding features for our web server. One is to build an emotional-->
-<!--                                dictionary for 2019-nCoV, which can highlight its high frequent vocabulary. The other is-->
-<!--                                to assess and visualize the dynamic changes for the public's positive and negative-->
-<!--                                emotions in response to 2019-nCoV at different time point. These features not only are-->
-<!--                                able to provide the retrospective assessment function for psychologists, but also can be-->
-<!--                                used as the references for national policies development.  <a href="psychology.html" target="_blank"><u>View details</u></a><br>-->
-<!--                                <a href="emotional_words.html" target="_blank"><img src="/static/img/emotional words.png" style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>-->
-<!--                        </div>-->
-
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-5" style="float:right;right:8%">-->
-<!--                    <div class="ibox float-e-margins">-->
-<!--                        <div class="ibox-title" style="width: 650px;height: 330px;">-->
-<!--						<br><br>-->
-<!--						<h3>Funding Support</h3>-->
-<!--						<p>This work was supported by National Science and Tech-nology Major Project [2018ZX10201002] and Sichuan University Postdoctoral Research and Development Foundation [2020SCU12056].</p>-->
-<!--                        <br>-->
-<!--						<h3>Contact Us</h3>-->
-<!--						<p>Address: College of Computer Science, Sichuan University. No. 24 South Section 1, Yihuan Road, Chengdu Sichuan, China, 610065. <br>E-mail: xiaoming@scu.edu.cn    zhangle06@scu.edu.cn</p>-->
-<!--                        </div>-->
-
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-
         </div>
+        <div class="row">
+            <div class="col-md-5" style="float:left;left:-8%">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="width: 650px;height: 430px;">
+                        <h2>Cell subtype identification</h2>
+                        <p>We used the top 30 upregulated/downregulated 3D transition genes for each 3D subtrajectory as input. Then, we employed our developed algorithm to identify a cell subtype corresponding to the selected trajectory at different times.  <a href="/cell_subtype_identification" target="_blank"><u>View details</u></a><br>
+                            <a href="/cell_subtype_identification" target="_blank"><img src="/static/img/cell_subtype_identification.png" style="width:65%;height:65%;margin-top:20px;margin-left: 50px;"></a></p>
+
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5" style="float:right;right:8%">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="width: 655px;height: 430px;">
+                        <h2>Cell subtype similarity computing</h2>
+                        <p>We used the marker gene sets of cell subtypes corresponding to the selected trajectory at different times as input. Then, we employed a similarity algorithm for cell subtypes to describe the similarity between cell subtypes at different times on the same trajectory.  <a href="/cell_subtype_similarity_computing" target="_blank"><u>View details</u></a><br>
+                            <a href="/cell_subtype_similarity_computing" target="_blank"><img src="/static/img/cell_subtype_similarity_computing.jpg" style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5" style="float:left;left:-8%">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="width: 650px;height: 430px;">
+                        <h2>Similar cell type search</h2>
+                        <p>We used marker genes of the cell subtypes as input. Then, we found the top 5 similar cell types for each cell subtype by using CellMeSH. Next, we performed a union operation for these top five similar cell types.  <a href="/similar_cell_type_search" target="_blank"><u>View details</u></a><br>
+                            <a href="/similar_cell_type_search" target="_blank"><img src="/static/img/similar_cell_type_search.jpg" style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-5" style="float:right;right:8%">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="width: 650px;height: 430px;">
+                        <h2>Cell-Cell communication analysis</h2>
+                        <p>We used Zscore for each ligand-receptor of cell subtypes and for all the brain regions as the input. Then, we employed the cell-cell communication strength (Density) algorithm to obtain the discrete interaction intensity after conversion of the continuous interaction intensity and the sum of the interaction intensity of N points in the corresponding position, and the average for each ligand receptor of the cell subtypes. <a href="/cell_cell_communication_analysis" target="_blank"><u>View details</u></a><br>
+                            <a href="/cell_cell_communication_analysis" target="_blank"><img src="/static/img/cell_cell_communication_analysis.jpg" style="width:55%;height:55%;margin-top:20px;margin-left: 50px;"></a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
 
     </div>
 
+</div>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
-       
 
-    <script language="javascript" type="text/javascript">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
 
-        function write2() {
 
-            htmlobj = $.ajax({ url: "/static/tail.html", async: false });
-            var tail = htmlobj.responseText;
+<script language="javascript" type="text/javascript">
 
-            document.write(tail);
-        }
+    function write2() {
 
-        write2();
-    </script>
+        htmlobj = $.ajax({ url: "/static/tail.html", async: false });
+        var tail = htmlobj.responseText;
 
-    <!--<script src="js/tail_2.js"></script>-->
+        document.write(tail);
+    }
+
+    write2();
+</script>
+
+<!--<script src="js/tail_2.js"></script>-->
 
 </body>
 

@@ -1,0 +1,51 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>table</title>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+
+        /*提示框*/
+        #mytitle {
+            position: absolute;
+            color: #ffffff;
+            max-width: 160px;
+            font-size: 14px;
+            padding: 4px;
+            background: rgba(40, 40, 40, 0.8);
+            border: solid 1px #e9f7f6;
+            border-radius: 5px;
+        }
+    </style>
+    <table id="test">
+
+    </table>
+</head>
+<body>
+<div id="image">
+    <img  src="http://162.14.117.72/images/blank.jpg" class="mytooltip" title="这是一段提示的详细信息,内容待确定"
+         style="position: absolute;top: 100px; right: 300px; width: 150px;cursor:pointer;"/>
+</div>
+</body>
+<script>
+    table = document.getElementById("test");
+    tBody = document.createElement("tBody");
+    for (var i = 0; i < 5; i++) {
+        tr = document.createElement("tr");
+        tBody.appendChild(tr);
+        for (var j = 0; j < 4; j++) {
+            td = document.createElement("td");
+            tr.appendChild(td);
+            td.innerHTML = "列：" + j + " 行：" + i;
+        }
+    }
+    table.appendChild(tBody);
+    // document.body.appendChild(table);
+</script>
+<html>
