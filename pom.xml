@@ -14,7 +14,7 @@
     <name>scedu_cerebral_hemorrhage_platform_java</name>
     <description>scedu_cerebral_hemorrhage_platform_java</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
