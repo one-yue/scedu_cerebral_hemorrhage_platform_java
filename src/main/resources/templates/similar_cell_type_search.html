@@ -14,29 +14,29 @@
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
 
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link href="/3dstivh/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/3dstivh/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
-    <link rel="shortcut icon" href="/static/img/coronavirus_logo.png">
-    <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="/static/css/animate.css" rel="stylesheet">
-    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
-    <script src="/static/js/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/3dstivh/static/img/coronavirus_logo.png">
+    <link href="/3dstivh/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/3dstivh/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/3dstivh/static/css/animate.css" rel="stylesheet">
+    <link href="/3dstivh/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="/3dstivh/static/js/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="/static/css/dataTables.semanticui.min.css">
-    <link rel="stylesheet" href="/static/css/buttons.semanticui.min.css">
-    <link rel="stylesheet" href="/static/css/select.semanticui.min.css">
-    <link rel="stylesheet" href="/static/css/semantic.min.css">
-    <link rel="stylesheet" href="/static/css/my.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/dataTables.semanticui.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/buttons.semanticui.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/select.semanticui.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/semantic.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/my.css">
 
-    <script src="/static/js/semantic.min.js"></script>
+    <script src="/3dstivh/static/js/semantic.min.js"></script>
 
     <script language="javascript" type="text/javascript">
 
         function write1() {
 
-            htmlobj = $.ajax({url: "/static/head.html", async: false});
+            htmlobj = $.ajax({url: "/3dstivh/static/head.html", async: false});
             var head = htmlobj.responseText;
             document.write(head);
 
@@ -133,7 +133,7 @@
                 <br>We search the top 5 similar cell types for each cell subtype by using CellMeSH in <a
                     href="https://uncurl.cs.washington.edu/db_query" target="_blank"> UNCURL </a> :<br/><br/>
 
-                1. First, please use the function of <a href="/cell_subtype_analysis" target="_blank"> "Cell SubType
+                1. First, please use the function of <a href="/3dstivh/cell_subtype_identification" target="_blank"> "Cell SubType
                 Analysis" </a>
                 to get the trajectory-based transition genes and then click the button of “Copy gene list” below the
                 table to get the genes’ name to the clipboard.<br/><br/>
@@ -163,7 +163,7 @@
 
     function write2() {
 
-        htmlobj = $.ajax({url: "/static/tail.html", async: false});
+        htmlobj = $.ajax({url: "/3dstivh/static/tail.html", async: false});
         var tail = htmlobj.responseText;
 
         document.write(tail);

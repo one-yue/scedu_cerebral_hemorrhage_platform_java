@@ -15,26 +15,26 @@
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
 
-    <link rel="shortcut icon" href="/static/img/logo.png">
-    <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="/static/css/animate.css" rel="stylesheet">
-    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
-    <script src="/static/js/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/3dstivh/static/img/logo.png">
+    <link href="/3dstivh/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/3dstivh/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/3dstivh/static/css/animate.css" rel="stylesheet">
+    <link href="/3dstivh/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="/3dstivh/static/js/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="/static/css/dataTables.semanticui.min.css">
-    <link rel="stylesheet" href="/static/css/buttons.semanticui.min.css">
-    <link rel="stylesheet" href="/static/css/select.semanticui.min.css">
-    <link rel="stylesheet" href="/static/css/semantic.min.css">
-    <link rel="stylesheet" href="/static/css/my.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/dataTables.semanticui.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/buttons.semanticui.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/select.semanticui.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/semantic.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/my.css">
 
-    <script src="/static/js/semantic.min.js"></script>
+    <script src="/3dstivh/static/js/semantic.min.js"></script>
 
     <script language="javascript" type="text/javascript">
 
         function write1() {
 
-            htmlobj = $.ajax({url: "/static/head.html", async: false});
+            htmlobj = $.ajax({url: "/3dstivh/static/head.html", async: false});
             var head = htmlobj.responseText;
             document.write(head);
 
@@ -140,10 +140,10 @@
                         <h2>Cell subtype identification</h2>
                         <p>We used the top 30 upregulated/downregulated 3D transition genes for each 3D subtrajectory as
                             input. Then, we employed our developed algorithm to identify a cell subtype corresponding to
-                            the selected trajectory at different times. <a href="/cell_subtype_identification"
+                            the selected trajectory at different times. <a href="/3dstivh/cell_subtype_identification"
                                                                            target="_blank"><u>View details</u></a><br>
-                            <a href="/cell_subtype_identification" target="_blank"><img
-                                    src="/static/img/cell_subtype_identification.png"
+                            <a href="/3dstivh/cell_subtype_identification" target="_blank"><img
+                                    src="/3dstivh/static/img/cell_subtype_identification.png"
                                     style="width:65%;height:65%;margin-top:20px;margin-left: 50px;"></a></p>
 
                     </div>
@@ -159,10 +159,10 @@
                         <p>We used the marker gene sets of cell subtypes corresponding to the selected trajectory at
                             different times as input. Then, we employed a similarity algorithm for cell subtypes to
                             describe the similarity between cell subtypes at different times on various trajectory. <a
-                                    href="/cell_subtype_similarity_computing" target="_blank"><u>View
+                                    href="/3dstivh/cell_subtype_similarity_computing" target="_blank"><u>View
                                 details</u></a><br>
-                            <a href="/cell_subtype_similarity_computing" target="_blank"><img
-                                    src="/static/img/cell_subtype_similarity_computing.jpg"
+                            <a href="/3dstivh/cell_subtype_similarity_computing" target="_blank"><img
+                                    src="/3dstivh/static/img/cell_subtype_similarity_computing.jpg"
                                     style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
                     </div>
 
@@ -176,10 +176,10 @@
                         <h2>Similar cell type search</h2>
                         <p>We used marker genes of the cell subtypes as input. Then, we found the top 5 similar cell
                             types for each cell subtype by using CellMeSH. Next, we performed a union operation for
-                            these top five similar cell types. <a href="/similar_cell_type_search" target="_blank"><u>View
+                            these top five similar cell types. <a href="/3dstivh/similar_cell_type_search" target="_blank"><u>View
                                 details</u></a><br>
-                            <a href="/similar_cell_type_search" target="_blank"><img
-                                    src="/static/img/similar_cell_type_search.jpg"
+                            <a href="/3dstivh/similar_cell_type_search" target="_blank"><img
+                                    src="/3dstivh/static/img/similar_cell_type_search.jpg"
                                     style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
                     </div>
 
@@ -194,9 +194,9 @@
                             the discrete interaction intensity after conversion of the continuous interaction intensity
                             and the sum of the interaction intensity of N points in the corresponding position, and the
                             average for each ligand receptor of the cell subtypes. <a
-                                    href="/cell_cell_communication_analysis" target="_blank"><u>View details</u></a><br>
-                            <a href="/cell_cell_communication_analysis" target="_blank"><img
-                                    src="/static/img/cell_cell_communication_analysis.jpg"
+                                    href="/3dstivh/cell_cell_communication_analysis" target="_blank"><u>View details</u></a><br>
+                            <a href="/3dstivh/cell_cell_communication_analysis" target="_blank"><img
+                                    src="/3dstivh/static/img/cell_cell_communication_analysis.jpg"
                                     style="width:55%;height:55%;margin-top:20px;margin-left: 50px;"></a></p>
                     </div>
 
@@ -221,7 +221,7 @@
 
     function write2() {
 
-        htmlobj = $.ajax({url: "/static/tail.html", async: false});
+        htmlobj = $.ajax({url: "/3dstivh/static/tail.html", async: false});
         var tail = htmlobj.responseText;
 
         document.write(tail);

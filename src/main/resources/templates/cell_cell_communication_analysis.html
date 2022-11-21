@@ -14,29 +14,29 @@
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
 
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link href="/3dstivh/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/3dstivh/static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
-    <link rel="shortcut icon" href="/static/img/coronavirus_logo.png">
-    <link href="/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="/static/css/animate.css" rel="stylesheet">
-    <link href="/static/css/style.css?v=4.1.0" rel="stylesheet">
-    <script src="/static/js/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/3dstivh/static/img/coronavirus_logo.png">
+    <link href="/3dstivh/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/3dstivh/static/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/3dstivh/static/css/animate.css" rel="stylesheet">
+    <link href="/3dstivh/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <script src="/3dstivh/static/js/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="/static/css/dataTables.semanticui.min.css">
-    <link rel="stylesheet" href="/static/css/buttons.semanticui.min.css">
-    <link rel="stylesheet" href="/static/css/select.semanticui.min.css">
-    <link rel="stylesheet" href="/static/css/semantic.min.css">
-    <link rel="stylesheet" href="/static/css/my.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/dataTables.semanticui.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/buttons.semanticui.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/select.semanticui.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/semantic.min.css">
+    <link rel="stylesheet" href="/3dstivh/static/css/my.css">
 
-    <script src="/static/js/semantic.min.js"></script>
+    <script src="/3dstivh/static/js/semantic.min.js"></script>
 
     <script language="javascript" type="text/javascript">
 
         function write1() {
 
-            htmlobj = $.ajax({url: "/static/head.html", async: false});
+            htmlobj = $.ajax({url: "/3dstivh/static/head.html", async: false});
             var head = htmlobj.responseText;
             document.write(head);
 
@@ -111,7 +111,7 @@
                                         <option value="subtype1">TH->CA1->DG</option>
                                         <option value="subtype3">VL->I->(V_VIa_VIb)</option>
                                     </select>
-                                    <img src="/static/img/question.png" title="Please select a specified cell subtype."
+                                    <img src="/3dstivh/static/img/question.png" title="Please select a specified cell subtype."
                                          width="25" height="25">
                                 </p>
 
@@ -123,7 +123,7 @@
                                         <option value="IVH_7d">IVH_7d</option>
                                         <option value="IVH_Sham">IVH_Sham</option>
                                     </select>
-                                    <img src="/static/img/question.png"
+                                    <img src="/3dstivh/static/img/question.png"
                                          title="Please select one experimental group after IVH." width="25" height="25">
                                 </p>
 
@@ -143,7 +143,7 @@
         <div id="div1"
              style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
             <p>Cell subtype’s Ligend_Receptor pairs:
-                <img src="/static/img/question.png"
+                <img src="/3dstivh/static/img/question.png"
                      title="The Ligend-Receptor pairs corresponding to the marker gene set of cell subtype in CellTalkDB database."
                      width="25" height="25">
             </p>
@@ -156,7 +156,7 @@
         <div id="div2"
              style="border-style:dotted;border-radius:16px;border-width:1px;margin: 15px 10px;padding:25px;font-size:large">
             <p>Cell subtype’s Cell-cell communication strength Density:
-                <img src="/static/img/question.png"
+                <img src="/3dstivh/static/img/question.png"
                      title="The average Cell-cell communication strength Density for all Ligand-Receptor pairs of the cell subtypes at the specified time ."
                      width="25" height="25">
             </p>
@@ -223,7 +223,7 @@
         $.ajax({
             async: false,
             type: "get",
-            url: '/cell_subtype_analysis/subtypeData?time=' + time + '&subtype=' + subtype,
+            url: '/3dstivh/cell_subtype_analysis/subtypeData?time=' + time + '&subtype=' + subtype,
             contentType: 'application/json',
             success: function (data) {
                 var table = document.getElementById("tableData");
@@ -275,7 +275,7 @@
 
     function write2() {
 
-        htmlobj = $.ajax({url: "/static/tail.html", async: false});
+        htmlobj = $.ajax({url: "/3dstivh/static/tail.html", async: false});
         var tail = htmlobj.responseText;
 
         document.write(tail);
