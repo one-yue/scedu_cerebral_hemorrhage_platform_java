@@ -12,7 +12,7 @@
     <meta name="description"
           content="Web service for 2019-NcoV transmission, genome, and psychological stress analysis">
     <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html" />
+    <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
 
     <link rel="shortcut icon" href="/static/img/logo.png">
@@ -34,7 +34,7 @@
 
         function write1() {
 
-            htmlobj = $.ajax({ url: "/static/head.html", async: false });
+            htmlobj = $.ajax({url: "/static/head.html", async: false});
             var head = htmlobj.responseText;
             document.write(head);
 
@@ -123,7 +123,12 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="width: 1340px; height: 160px;">
                         <h2>Overview</h2>
-                        <p>Since Intraventricular haemorrhage (IVH) is one of the common complications after various acute brain injuries, leading to severe mortality and mobility, with great burdens on economics and society, we develop such a 3DAsIVH webservice that not only offers online cell subtype identification to identify a cell subtype, but also provides similarity algorithm for cell subtypes, search for similar cell types by CellMeSH, cell-cell communication and signalling pathway analysis to analysis the development of IVH.</p>
+                        <p>Since Intraventricular haemorrhage (IVH) is one of the common complications after various
+                            acute brain injuries, leading to severe mortality and mobility, with great burdens on
+                            economics and society, we develop such a 3DAsIVH webservice that not only offers online cell
+                            subtype identification to identify a cell subtype, but also provides similarity algorithm
+                            for cell subtypes, search for similar cell types by CellMeSH, cell-cell communication and
+                            signalling pathway analysis to analysis the development of IVH.</p>
                     </div>
                 </div>
             </div>
@@ -133,8 +138,13 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="width: 650px;height: 430px;">
                         <h2>Cell subtype identification</h2>
-                        <p>We used the top 30 upregulated/downregulated 3D transition genes for each 3D subtrajectory as input. Then, we employed our developed algorithm to identify a cell subtype corresponding to the selected trajectory at different times.  <a href="/cell_subtype_identification" target="_blank"><u>View details</u></a><br>
-                            <a href="/cell_subtype_identification" target="_blank"><img src="/static/img/cell_subtype_identification.png" style="width:65%;height:65%;margin-top:20px;margin-left: 50px;"></a></p>
+                        <p>We used the top 30 upregulated/downregulated 3D transition genes for each 3D subtrajectory as
+                            input. Then, we employed our developed algorithm to identify a cell subtype corresponding to
+                            the selected trajectory at different times. <a href="/cell_subtype_identification"
+                                                                           target="_blank"><u>View details</u></a><br>
+                            <a href="/cell_subtype_identification" target="_blank"><img
+                                    src="/static/img/cell_subtype_identification.png"
+                                    style="width:65%;height:65%;margin-top:20px;margin-left: 50px;"></a></p>
 
                     </div>
                     <div>
@@ -146,8 +156,14 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="width: 655px;height: 430px;">
                         <h2>Cell subtype similarity computing</h2>
-                        <p>We used the marker gene sets of cell subtypes corresponding to the selected trajectory at different times as input. Then, we employed a similarity algorithm for cell subtypes to describe the similarity between cell subtypes at different times on the same trajectory.  <a href="/cell_subtype_similarity_computing" target="_blank"><u>View details</u></a><br>
-                            <a href="/cell_subtype_similarity_computing" target="_blank"><img src="/static/img/cell_subtype_similarity_computing.jpg" style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
+                        <p>We used the marker gene sets of cell subtypes corresponding to the selected trajectory at
+                            different times as input. Then, we employed a similarity algorithm for cell subtypes to
+                            describe the similarity between cell subtypes at different times on various trajectory. <a
+                                    href="/cell_subtype_similarity_computing" target="_blank"><u>View
+                                details</u></a><br>
+                            <a href="/cell_subtype_similarity_computing" target="_blank"><img
+                                    src="/static/img/cell_subtype_similarity_computing.jpg"
+                                    style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
                     </div>
 
                 </div>
@@ -158,8 +174,13 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="width: 650px;height: 430px;">
                         <h2>Similar cell type search</h2>
-                        <p>We used marker genes of the cell subtypes as input. Then, we found the top 5 similar cell types for each cell subtype by using CellMeSH. Next, we performed a union operation for these top five similar cell types.  <a href="/similar_cell_type_search" target="_blank"><u>View details</u></a><br>
-                            <a href="/similar_cell_type_search" target="_blank"><img src="/static/img/similar_cell_type_search.jpg" style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
+                        <p>We used marker genes of the cell subtypes as input. Then, we found the top 5 similar cell
+                            types for each cell subtype by using CellMeSH. Next, we performed a union operation for
+                            these top five similar cell types. <a href="/similar_cell_type_search" target="_blank"><u>View
+                                details</u></a><br>
+                            <a href="/similar_cell_type_search" target="_blank"><img
+                                    src="/static/img/similar_cell_type_search.jpg"
+                                    style="width:70%;height:70%;margin-top:20px;margin-left: 50px;"></a></p>
                     </div>
 
                 </div>
@@ -168,8 +189,15 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="width: 650px;height: 430px;">
                         <h2>Cell-cell communication analysis</h2>
-                        <p>We used Zscore for each ligand-receptor of cell subtypes and for all the brain regions as the input. Then, we employed the cell-cell communication strength (Density) algorithm to obtain the discrete interaction intensity after conversion of the continuous interaction intensity and the sum of the interaction intensity of N points in the corresponding position, and the average for each ligand receptor of the cell subtypes. <a href="/cell_cell_communication_analysis" target="_blank"><u>View details</u></a><br>
-                            <a href="/cell_cell_communication_analysis" target="_blank"><img src="/static/img/cell_cell_communication_analysis.jpg" style="width:55%;height:55%;margin-top:20px;margin-left: 50px;"></a></p>
+                        <p>We used Zscore for each ligand-receptor of cell subtypes and for all the brain regions as the
+                            input. Then, we employed the cell-cell communication strength (Density) algorithm to obtain
+                            the discrete interaction intensity after conversion of the continuous interaction intensity
+                            and the sum of the interaction intensity of N points in the corresponding position, and the
+                            average for each ligand receptor of the cell subtypes. <a
+                                    href="/cell_cell_communication_analysis" target="_blank"><u>View details</u></a><br>
+                            <a href="/cell_cell_communication_analysis" target="_blank"><img
+                                    src="/static/img/cell_cell_communication_analysis.jpg"
+                                    style="width:55%;height:55%;margin-top:20px;margin-left: 50px;"></a></p>
                     </div>
 
                 </div>
@@ -193,7 +221,7 @@
 
     function write2() {
 
-        htmlobj = $.ajax({ url: "/static/tail.html", async: false });
+        htmlobj = $.ajax({url: "/static/tail.html", async: false});
         var tail = htmlobj.responseText;
 
         document.write(tail);
